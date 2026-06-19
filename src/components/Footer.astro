@@ -1,0 +1,63 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { navigation, site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-navy-950 text-white">
+  <div class="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+    <div>
+      <Logo light />
+      <p class="mt-6 max-w-sm text-sm leading-7 text-slate-300">
+        Platform profesional untuk kebajikan, pembangunan ilmu dan jaringan komuniti Pesuruhjaya Sumpah Malaysia.
+      </p>
+      <div class="mt-6 flex gap-3" aria-label="Media sosial">
+        {['f', 'in', 'ig'].map((label) => (
+          <a href="#" aria-label={`PESUMA di ${label}`} class="flex size-10 items-center justify-center rounded-lg border border-white/15 text-xs font-black text-slate-300 transition hover:border-gold-300 hover:text-gold-300">
+            {label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Pautan Pantas</h2>
+      <ul class="mt-5 space-y-3">
+        {navigation.slice(0, 4).map((item) => (
+          <li><a href={item.href} class="text-sm text-slate-300 hover:text-white">{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Maklumat</h2>
+      <ul class="mt-5 space-y-3">
+        <li><a href="/keahlian/" class="text-sm text-slate-300 hover:text-white">Keahlian</a></li>
+        <li><a href="/sumber/" class="text-sm text-slate-300 hover:text-white">Sumber</a></li>
+        <li><a href="/kedai/" class="text-sm text-slate-300 hover:text-white">Kedai PESUMA</a></li>
+        <li><a href={site.epjsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-white">Portal ePJS <Icon name="external" size={14} /></a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Hubungi Kami</h2>
+      <p class="mt-5 text-sm leading-6 text-slate-300">Sekretariat PESUMA<br />Malaysia</p>
+      <a href={`mailto:${site.email}`} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold-300">
+        <Icon name="mail" size={18} /> {site.email}
+      </a>
+    </div>
+  </div>
+
+  <div class="border-t border-white/10">
+    <div class="container-site flex flex-col gap-4 py-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+      <p>© {year} PESUMA. Hak cipta terpelihara.</p>
+      <div class="flex flex-wrap gap-x-5 gap-y-2">
+        <a href="/dasar-privasi/" class="hover:text-white">Dasar Privasi</a>
+        <a href="/terma-penggunaan/" class="hover:text-white">Terma Penggunaan</a>
+        <a href="/penafian/" class="hover:text-white">Penafian</a>
+      </div>
+    </div>
+  </div>
+</footer>

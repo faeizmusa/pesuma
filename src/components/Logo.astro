@@ -1,0 +1,22 @@
+---
+interface Props {
+  light?: boolean;
+}
+const { light = false } = Astro.props;
+---
+
+<a href="/" class="inline-flex items-center gap-3 rounded-md" aria-label="PESUMA — Laman utama">
+  <span class="relative flex size-11 items-center justify-center overflow-hidden rounded-xl bg-gold-400 shadow-md shadow-black/10">
+    <svg viewBox="0 0 44 44" class="size-9 text-navy-950" aria-hidden="true">
+      <path fill="currentColor" d="M22 5 36 11v9c0 8.8-5.7 15.5-14 19-8.3-3.5-14-10.2-14-19v-9L22 5Z"/>
+      <path fill="#F2B705" d="M15 15.5h14v3H15zM20.5 18h3v11h-3zM15 29h14v3H15z"/>
+      <circle cx="22" cy="12" r="2.3" fill="#F2B705"/>
+    </svg>
+  </span>
+  <span class="leading-none">
+    <strong class:list={['block text-xl font-black tracking-[0.12em]', light ? 'text-white' : 'text-navy-900']}>PESUMA</strong>
+    <span class:list={['mt-1 block text-[0.58rem] font-semibold tracking-[0.11em] uppercase', light ? 'text-slate-300' : 'text-slate-500']}>
+      Berkhidmat Berintegriti
+    </span>
+  </span>
+</a>

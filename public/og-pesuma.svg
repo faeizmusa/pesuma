@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#071B3A"/>
+  <circle cx="1090" cy="60" r="280" fill="#102E5C"/>
+  <circle cx="1040" cy="80" r="170" fill="#F2B705" opacity=".12"/>
+  <rect x="80" y="85" width="92" height="92" rx="24" fill="#F2B705"/>
+  <path fill="#071B3A" d="M126 99 157 112v20c0 19-12.5 34-31 42-18.5-8-31-23-31-42v-20l31-13Z"/>
+  <path fill="#F2B705" d="M109 124h34v6h-34zm13 6h8v25h-8zm-13 25h34v6h-34z"/>
+  <text x="200" y="152" fill="#fff" font-family="Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="8">PESUMA</text>
+  <text x="80" y="320" fill="#fff" font-family="Arial, sans-serif" font-size="62" font-weight="800">Pertubuhan Profesional Untuk</text>
+  <text x="80" y="395" fill="#F2B705" font-family="Arial, sans-serif" font-size="62" font-weight="800">Pesuruhjaya Sumpah Malaysia</text>
+  <text x="80" y="485" fill="#CBD5E1" font-family="Arial, sans-serif" font-size="28">Berkhidmat Berintegriti • Kebajikan Ahli • Pembangunan Profesional</text>
+</svg>

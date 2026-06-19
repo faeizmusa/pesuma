@@ -1,0 +1,71 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { site } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = `${site.name} | Pertubuhan Profesional Pesuruhjaya Sumpah Malaysia`,
+  description = site.description,
+  image = '/og-pesuma.svg',
+} = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url);
+const socialImage = new URL(image, site.url);
+
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.fullName,
+  alternateName: site.name,
+  url: site.url,
+  logo: `${site.url}/logo-mark.svg`,
+  description: site.description,
+  email: site.email,
+  areaServed: {
+    '@type': 'Country',
+    name: 'Malaysia',
+  },
+};
+---
+
+<!doctype html>
+<html lang="ms-MY">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#071B3A" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ms_MY" />
+    <meta property="og:site_name" content="PESUMA" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImage} />
+    <link rel="icon" type="image/svg+xml" href="/logo-mark.svg" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+  </head>
+  <body>
+    <a href="#kandungan-utama" class="fixed top-3 left-3 z-[100] -translate-y-20 rounded-lg bg-gold-400 px-4 py-3 text-sm font-extrabold text-navy-950 transition focus:translate-y-0">
+      Langkau ke kandungan utama
+    </a>
+    <Header />
+    <main id="kandungan-utama">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

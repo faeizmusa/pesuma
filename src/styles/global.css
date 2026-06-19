@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #06152e;
+  --color-navy-900: #071b3a;
+  --color-navy-800: #0b2448;
+  --color-navy-700: #102e5c;
+  --color-gold-300: #f8d477;
+  --color-gold-400: #f2b705;
+  --color-gold-500: #d4a017;
+  --color-cream-50: #fffdf7;
+  --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --shadow-soft: 0 18px 50px -24px rgb(7 27 58 / 0.22);
+  --shadow-card: 0 20px 45px -30px rgb(7 27 58 / 0.28);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    @apply bg-slate-50 font-sans text-slate-900 antialiased;
+  }
+
+  ::selection {
+    @apply bg-gold-300 text-navy-950;
+  }
+
+  a,
+  button {
+    @apply outline-none;
+  }
+
+  :focus-visible {
+    @apply ring-3 ring-gold-400 ring-offset-3;
+  }
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-7xl px-5 sm:px-7 lg:px-10;
+  }
+
+  .section-pad {
+    @apply py-20 sm:py-24 lg:py-28;
+  }
+
+  .eyebrow {
+    @apply mb-4 inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-gold-500 uppercase;
+  }
+
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-7 bg-gold-500;
+  }
+
+  .section-title {
+    @apply max-w-3xl text-3xl leading-tight font-extrabold tracking-tight text-navy-900 sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .section-copy {
+    @apply mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold-400 px-6 py-3 text-sm font-extrabold text-navy-950 shadow-lg shadow-gold-500/15 transition hover:-translate-y-0.5 hover:bg-gold-300;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:-translate-y-0.5 hover:border-navy-700 hover:bg-slate-50;
+  }
+
+  .btn-secondary-dark {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/8 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-gold-300/70 hover:bg-white/14;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200/80 bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold-500/35 hover:shadow-soft;
+  }
+
+  .icon-shell {
+    @apply flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-gold-300;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

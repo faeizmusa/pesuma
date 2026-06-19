@@ -1,0 +1,76 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { navigation } from '../data/site';
+---
+
+<header class="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 backdrop-blur-xl">
+  <div class="container-site flex h-20 items-center justify-between gap-6">
+    <Logo />
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Navigasi utama">
+      {navigation.map((item) => (
+        <a href={item.href} class="text-sm font-semibold text-slate-700 transition hover:text-navy-700">
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-3">
+      <a href="/keahlian/" class="btn-primary hidden sm:inline-flex">Jadi Ahli</a>
+      <button
+        id="menu-button"
+        class="flex size-11 items-center justify-center rounded-xl border border-slate-200 text-navy-900 lg:hidden"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Buka menu navigasi"
+      >
+        <span class="menu-open"><Icon name="menu" /></span>
+        <span class="menu-close hidden"><Icon name="close" /></span>
+      </button>
+    </div>
+  </div>
+
+  <div id="mobile-menu" class="hidden border-t border-slate-200 bg-white lg:hidden">
+    <nav class="container-site flex flex-col py-4" aria-label="Navigasi mudah alih">
+      {navigation.map((item) => (
+        <a href={item.href} class="border-b border-slate-100 py-3.5 text-sm font-bold text-navy-900 last:border-0">
+          {item.label}
+        </a>
+      ))}
+      <a href="/keahlian/" class="btn-primary mt-4 sm:hidden">Jadi Ahli PESUMA</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>('#menu-button');
+  const menu = document.querySelector<HTMLElement>('#mobile-menu');
+  const openIcon = button?.querySelector('.menu-open');
+  const closeIcon = button?.querySelector('.menu-close');
+
+  const closeMenu = () => {
+    menu?.classList.add('hidden');
+    button?.setAttribute('aria-expanded', 'false');
+    button?.setAttribute('aria-label', 'Buka menu navigasi');
+    openIcon?.classList.remove('hidden');
+    closeIcon?.classList.add('hidden');
+  };
+
+  button?.addEventListener('click', () => {
+    const isOpen = button.getAttribute('aria-expanded') === 'true';
+    if (isOpen) {
+      closeMenu();
+    } else {
+      menu?.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+      button.setAttribute('aria-label', 'Tutup menu navigasi');
+      openIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+    }
+  });
+
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+  document.addEventListener('keydown', (event) => event.key === 'Escape' && closeMenu());
+</script>
