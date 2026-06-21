@@ -24,7 +24,12 @@ const organizationSchema = {
   name: site.fullName,
   alternateName: site.name,
   url: site.url,
-  logo: `${site.url}/logo-mark.svg`,
+  logo: {
+    '@type': 'ImageObject',
+    url: `${site.url}/logo-pesuma.png`,
+    width: 546,
+    height: 546,
+  },
   description: site.description,
   email: site.email,
   areaServed: {
@@ -55,7 +60,10 @@ const organizationSchema = {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
-    <link rel="icon" type="image/svg+xml" href="/logo-mark.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
   </head>
   <body>

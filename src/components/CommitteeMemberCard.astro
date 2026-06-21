@@ -1,0 +1,50 @@
+---
+import type { CommitteeMember } from '../lib/committee';
+import VisualPlaceholder from './VisualPlaceholder.astro';
+
+interface Props {
+  member: CommitteeMember;
+}
+
+const { member } = Astro.props;
+
+const placeholderVariants: Record<string, 'navy' | 'gold' | 'cream'> = {
+  'Kepimpinan Utama': 'navy',
+  'Majlis Tertinggi': 'gold',
+  'Ketua Biro': 'cream',
+  'Ahli Jawatankuasa': 'cream',
+  'Pemeriksa Kira-kira': 'cream',
+  'Penasihat': 'cream',
+};
+
+/* For Ketua Biro, extract specific bureau name from position.
+   Example: "Ketua Biro Undang-Undang" → "Undang-Undang"
+   "AJK Khas PESUMA Sarawak" stays as is. */
+const label =
+  member.positionGroup === 'Ketua Biro' && member.position.startsWith('Ketua Biro ')
+    ? member.position.replace('Ketua Biro ', '')
+    : member.positionGroup;
+---
+
+<a
+  href={`/jawatankuasa/${member.slug}/`}
+  class="group flex flex-col overflow-hidden rounded-[6px] border border-navy-900/10 bg-white shadow-card transition-all duration-[var(--transition-base)] hover:border-gold-400/40 hover:shadow-soft"
+>
+  <!-- Photo -->
+  <div class="aspect-[4/5] overflow-hidden bg-navy-900">
+    {member.photo ? (
+      <img src={member.photo} alt={member.fullName} class="h-full w-full object-cover transition-transform duration-[var(--transition-base)] group-hover:scale-[1.02]" loading="lazy" />
+    ) : (
+      <VisualPlaceholder variant={placeholderVariants[member.positionGroup] ?? 'cream'} aspect="tall" />
+    )}
+  </div>
+
+  <!-- Info -->
+  <div class="flex flex-1 flex-col gap-1.5 border-t border-navy-900/10 p-5">
+    <span class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">{label}</span>
+    <h3 class="font-serif text-lg font-normal leading-snug text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">
+      {member.fullName}
+    </h3>
+    <p class="text-xs leading-5 text-slate-600">{member.position}</p>
+  </div>
+</a>

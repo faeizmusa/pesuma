@@ -1,0 +1,91 @@
+---
+interface Props {
+  /** 'navy' | 'gold' | 'cream' | 'white' */
+  variant?: 'navy' | 'gold' | 'cream' | 'white';
+  /** 'square' | 'wide' | 'tall' */
+  aspect?: 'square' | 'wide' | 'tall';
+  /** Small decorative label (e.g. 'Berita', 'Program') */
+  label?: string;
+  class?: string;
+}
+
+const { variant = 'navy', aspect = 'wide', label, class: className = '' } = Astro.props;
+
+const aspectClass = {
+  square: 'aspect-square',
+  wide: 'aspect-[16/9]',
+  tall: 'aspect-[4/5]',
+}[aspect];
+
+const bgClass = {
+  navy: 'bg-navy-900',
+  gold: 'bg-gold-400/10',
+  cream: 'bg-cream-50',
+  white: 'bg-white',
+}[variant];
+
+const accentClass = {
+  navy: 'border-white/8',
+  gold: 'border-gold-400/20',
+  cream: 'border-navy-900/10',
+  white: 'border-navy-900/10',
+}[variant];
+
+const circleClass = {
+  navy: 'border-white/6 bg-white/[0.02]',
+  gold: 'border-gold-400/15 bg-gold-400/5',
+  cream: 'border-navy-900/8 bg-navy-900/[0.03]',
+  white: 'border-navy-900/8 bg-navy-900/[0.03]',
+}[variant];
+
+const diamondClass = {
+  navy: 'border-white/8',
+  gold: 'border-gold-400/15',
+  cream: 'border-navy-900/10',
+  white: 'border-navy-900/10',
+}[variant];
+
+const textClass = {
+  navy: 'text-white/25',
+  gold: 'text-gold-400/50',
+  cream: 'text-navy-900/20',
+  white: 'text-navy-900/20',
+}[variant];
+
+const labelClass = {
+  navy: 'text-white/40 border-white/10',
+  gold: 'text-gold-500 border-gold-400/20',
+  cream: 'text-navy-700 border-navy-900/15',
+  white: 'text-navy-700 border-navy-900/15',
+}[variant];
+---
+
+<div class={`relative overflow-hidden ${bgClass} ${aspectClass} ${accentClass} ${className}`} aria-hidden="true">
+  <!-- Subtle radial glow -->
+  <div class="absolute inset-0 opacity-[0.5]"
+    style="background: radial-gradient(ellipse 60% 60% at 30% 40%, currentColor, transparent 70%)">
+  </div>
+
+  <!-- Decorative rings -->
+  <div class={`absolute top-[12%] right-[8%] size-[55%] rounded-full border ${circleClass}`}></div>
+  <div class={`absolute top-[18%] right-[14%] size-[35%] rounded-full border ${diamondClass}`}></div>
+
+  <!-- Diamond / geometric accent -->
+  <div class={`absolute bottom-[18%] left-[10%] size-[18%] rotate-45 border ${diamondClass}`}></div>
+  <div class={`absolute bottom-[28%] left-[16%] size-[8%] rotate-45 ${variant === 'navy' ? 'bg-gold-400/15' : 'bg-gold-400/20'}`}></div>
+
+  <!-- Horizontal line accent -->
+  <div class={`absolute bottom-[38%] right-[22%] h-px w-[18%] ${variant === 'navy' ? 'bg-white/10' : 'bg-navy-900/10'}`}></div>
+
+  <!-- PESUMA insignia watermark -->
+  <span class={`absolute bottom-5 right-5 font-serif text-[0.55rem] font-bold tracking-[0.18em] uppercase ${textClass}`}>
+    PESUMA
+  </span>
+
+  <!-- Category label if provided -->
+  {label && (
+    <span class={`absolute bottom-5 left-5 border px-3 py-1.5 text-[0.58rem] font-bold tracking-[0.14em] uppercase ${labelClass}`}>
+      {label}
+    </span>
+  )}
+</div>

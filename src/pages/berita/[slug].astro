@@ -1,0 +1,98 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import GalleryGrid from '../../components/GalleryGrid.astro';
+import { getAllPosts, getPost } from '../../lib/content';
+
+export async function getStaticPaths() {
+  const posts = await getAllPosts();
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { slug: post.slug },
+  }));
+}
+
+const { slug } = Astro.props;
+const post = (await getPost(slug))!;
+
+const dateFormat = new Intl.DateTimeFormat('ms-MY', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+const formatDate = (date: string | null) => date ? dateFormat.format(new Date(`${date}T00:00:00+08:00`)) : '';
+---
+
+<BaseLayout
+  title={`${post.title} | PESUMA`}
+  description={post.excerpt}
+>
+  <article>
+    <!-- ═══════════ HEADER ═══════════ -->
+    <section class="bg-cream-50">
+      <div class="container-site py-14 sm:py-20 lg:py-24">
+        <a href="/berita/" class="link-arrow mb-8 inline-flex">
+          <span class="rotate-180"><Icon name="arrow" /></span> Semua Berita
+        </a>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <span class="text-[0.6rem] font-bold tracking-[0.16em] text-gold-500 uppercase">{post.category}</span>
+          {post.date && (
+            <>
+              <span class="text-[0.55rem] text-slate-300">/</span>
+              <time datetime={post.date} class="text-[0.6rem] text-slate-500">{formatDate(post.date)}</time>
+            </>
+          )}
+        </div>
+
+        <h1 class="mt-5 max-w-4xl font-serif text-[2rem] leading-[1.08] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.75rem] lg:text-[3.25rem]">
+          {post.title}
+        </h1>
+
+        {post.excerpt && (
+          <p class="mt-5 max-w-2xl text-base leading-7 text-slate-600">{post.excerpt}</p>
+        )}
+      </div>
+    </section>
+
+    <!-- ═══════════ COVER IMAGE ═══════════ -->
+    {post.coverImage && (
+      <div class="bg-white">
+        <div class="container-site pb-10 sm:pb-14 lg:pb-16">
+          <div class="aspect-[16/9] overflow-hidden rounded-[6px] bg-navy-900 shadow-soft">
+            <img src={post.coverImage} alt={post.title} class="h-full w-full object-cover" loading="eager" />
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- ═══════════ CONTENT ═══════════ -->
+    <div class="bg-white">
+      <div class="container-site pb-16 sm:pb-20 lg:pb-24">
+        {post.excerpt && (
+          <div class="mx-auto max-w-3xl">
+            <p class="text-lg leading-8 text-slate-700">{post.excerpt}</p>
+          </div>
+        )}
+
+        <!-- ═══════════ GALLERY ═══════════ -->
+        {post.gallery && post.gallery.length > 0 && (
+          <div class="mt-10 border-t border-navy-900/15 pt-10">
+            <GalleryGrid images={post.gallery} />
+          </div>
+        )}
+      </div>
+    </div>
+  </article>
+
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="bg-navy-900 section-pad text-center">
+    <div class="container-site">
+      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Kekal Terkini</p>
+      <h2 class="mx-auto mt-6 max-w-2xl font-serif text-[1.875rem] leading-[1.12] font-normal text-white sm:text-[2.25rem]">Ikuti perkembangan terbaru dari komuniti PESUMA.</h2>
+      <a href="/keahlian/" class="btn-primary mt-9">Daftar Sebagai Ahli <Icon name="arrow" /></a>
+    </div>
+  </section>
+</BaseLayout>

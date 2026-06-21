@@ -1,0 +1,152 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+
+const benefitCategories = [
+  {
+    title: 'Pembangunan Profesional',
+    icon: 'presentation',
+    items: [
+      'Akses seminar, konvensyen dan program pembangunan profesional yang dirancang khusus untuk memperkukuh amalan dan pengetahuan anda.',
+      'Latihan dan bengkel berkala mengenai perkembangan undang-undang, arahan amalan dan prosedur terkini.',
+      'Bahan rujukan dan panduan yang membantu anda kekal relevan dalam profesion.',
+    ],
+  },
+  {
+    title: 'Kebajikan & Sokongan',
+    icon: 'heart',
+    items: [
+      'Bantuan dan sokongan ketika menghadapi musibah seperti sakit, bencana atau kecemasan.',
+      'Khidmat nasihat dan rundingan perundangan bagi kes yang melibatkan tindakan tatatertib.',
+      'Saluran utama untuk menyuarakan pandangan berkaitan tugas dan perkhidmatan Pesuruhjaya Sumpah kepada pihak berkuasa.',
+    ],
+  },
+  {
+    title: 'Jaringan & Komuniti',
+    icon: 'network',
+    items: [
+      'Peluang berhubung dengan komuniti Pesuruhjaya Sumpah dari seluruh Malaysia dalam ruang yang membina.',
+      'Aktiviti muhibah, kerjasama dan tolong-menolong yang mengukuhkan ikatan sesama ahli.',
+      'Hubungan kekal dengan ahli yang telah bersara melalui program dan aktiviti persatuan.',
+    ],
+  },
+  {
+    title: 'Penjimatan & Privilege',
+    icon: 'star',
+    items: [
+      'Potongan harga bagi setiap program dan aktiviti yang dianjurkan oleh persatuan.',
+      'Hebahan terpilih dan akses awal kepada maklumat program dan inisiatif terbaru.',
+    ],
+  },
+];
+
+const requirements = [
+  {
+    number: '01',
+    title: 'Pemegang Lantikan Sah',
+    text: 'Pesuruhjaya Sumpah yang memegang lantikan semasa daripada Yang Amat Arif Ketua Hakim Negara.',
+  },
+  {
+    number: '02',
+    title: 'Pencadangan & Sokongan',
+    text: 'Dicadangkan dan menerima sokongan untuk menjadi ahli oleh seorang ahli semasa persatuan.',
+  },
+  {
+    number: '03',
+    title: 'Kelulusan Jawatankuasa',
+    text: 'Permohonan keahlian perlu mendapat sokongan dan kelulusan majoriti daripada Jawatankuasa Pusat.',
+  },
+];
+---
+
+<BaseLayout
+  title="Keahlian PESUMA | Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia"
+  description="Sertai PESUMA dan nikmati pelbagai manfaat keahlian — pembangunan profesional, kebajikan, jaringan komuniti dan banyak lagi."
+>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-950 text-white">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-y-0 right-0 w-[42%] border-l border-white/6 bg-[linear-gradient(145deg,rgba(199,164,73,0.09),transparent_60%)]"></div>
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] -translate-y-1/2 rounded-full border border-white/8"></div>
+    </div>
+    <div class="container-site relative py-20 lg:py-24">
+      <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Sertai PESUMA</p>
+      <h1 class="mt-8 max-w-4xl font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.03em] sm:text-[3.25rem] lg:text-[4rem]">
+        Keahlian yang <span class="text-gold-300">memberi nilai</span> kepada profesion anda.
+      </h1>
+      <p class="mt-5 max-w-2xl border-l border-gold-400/60 pl-6 text-base leading-8 text-slate-300 sm:text-lg">
+        Bukan sekadar keahlian. Ia adalah akses kepada komuniti, ilmu, sokongan dan jaringan yang memahami realiti profesion.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ KENAPA MENJADI AHLI ═══════════ -->
+  <section class="bg-white section-pad">
+    <div class="container-site text-center">
+      <p class="eyebrow justify-center">Manfaat Keahlian</p>
+      <h2 class="section-title mx-auto">Lebih daripada sekadar penyertaan.</h2>
+      <p class="section-copy mx-auto">Setiap ahli PESUMA mendapat akses kepada pelbagai manfaat yang dirancang untuk menyokong perjalanan profesional dan kebajikan anda.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════ BENEFIT CATEGORIES ═══════════ -->
+  {benefitCategories.map((cat, index) => (
+    <section class:list={['section-pad', index % 2 === 0 ? 'bg-cream-50' : 'bg-white']}>
+      <div class="container-site">
+        <div class="grid gap-10 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
+          <div>
+            <p class="eyebrow">Faedah {index + 1}</p>
+            <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem]">{cat.title}</h2>
+          </div>
+          <ul class="space-y-6 border-t border-navy-900/15 pt-7">
+            {cat.items.map((item) => (
+              <li class="flex items-start gap-4">
+                <span class="mt-1 shrink-0 text-gold-400"><Icon name="check" size={16} strokeWidth={2.5} /></span>
+                <span class="text-base leading-7 text-slate-700">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- ═══════════ SYARAT ═══════════ -->
+  <section class="bg-white section-pad border-t border-navy-900/10">
+    <div class="container-site grid gap-12 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
+      <div>
+        <p class="eyebrow">Kelayakan</p>
+        <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem]">Syarat Keahlian</h2>
+        <p class="mt-5 text-sm leading-7 text-slate-600">Proses permohonan yang telus dan profesional memastikan setiap ahli memenuhi standard yang ditetapkan.</p>
+      </div>
+      <ol class="border-t border-navy-900/15">
+        {requirements.map((req) => (
+          <li class="grid gap-4 border-b border-navy-900/15 py-8 sm:grid-cols-[4rem_1fr]">
+            <span class="font-serif text-2xl text-gold-500">{req.number}</span>
+            <div>
+              <h3 class="font-serif text-xl font-normal text-navy-900">{req.title}</h3>
+              <p class="mt-2 text-sm leading-7 text-slate-600">{req.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════ CARA DAFTAR ═══════════ -->
+  <section class="bg-navy-900 text-white section-pad">
+    <div class="container-site text-center">
+      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Sertai Kami</p>
+      <h2 class="mx-auto mt-6 max-w-3xl font-serif text-[1.875rem] leading-[1.12] font-normal text-white sm:text-[2.25rem] lg:text-[2.75rem]">
+        Jadilah sebahagian daripada komuniti Pesuruhjaya Sumpah yang berkembang melalui ilmu, kebajikan dan jaringan berintegriti.
+      </h2>
+      <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <a href="mailto:office@pesuma.com.my" class="btn-primary">Daftar Sekarang <Icon name="arrow" /></a>
+        <a href="/hubungi/" class="btn-secondary-dark">Hubungi Kami</a>
+      </div>
+      <p class="mt-6 text-xs leading-6 text-slate-400">Ada pertanyaan? E-melkan ke <a href="mailto:office@pesuma.com.my" class="underline hover:text-gold-300">office@pesuma.com.my</a></p>
+    </div>
+  </section>
+</BaseLayout>

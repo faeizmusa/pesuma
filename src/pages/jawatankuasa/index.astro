@@ -1,0 +1,118 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import CommitteeMemberCard from '../../components/CommitteeMemberCard.astro';
+import { getCurrentTerm, getCurrentMembers, groupByPosition, getAchievementsByTerm } from '../../lib/committee';
+
+const term = await getCurrentTerm();
+const members = term ? await getCurrentMembers() : [];
+const grouped = groupByPosition(members);
+
+const displayGroups = ['Kepimpinan Utama', 'Ketua Biro', 'Pemeriksa Kira-kira', 'Penasihat'] as const;
+const groupLabels: Record<string, string> = {
+  'Kepimpinan Utama': 'Kepimpinan Utama',
+  'Ketua Biro': 'Ketua Biro',
+  'Pemeriksa Kira-kira': 'Pemeriksa Kira-kira',
+  'Penasihat': 'Penasihat',
+};
+---
+
+<BaseLayout
+  title="Jawatankuasa Pusat | PESUMA"
+  description={term ? `Kenali barisan Jawatankuasa ${term.termName} yang menggerakkan hala tuju dan program PESUMA.` : 'Kenali barisan kepimpinan PESUMA.'}
+>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-950 text-white">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-y-0 right-0 w-[42%] border-l border-white/6 bg-[linear-gradient(145deg,rgba(199,164,73,0.09),transparent_60%)]"></div>
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] -translate-y-1/2 rounded-full border border-white/8"></div>
+    </div>
+    <div class="container-site relative py-20 lg:py-24">
+      <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Kepimpinan PESUMA</p>
+      <h1 class="mt-8 max-w-4xl font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.03em] sm:text-[3.25rem] lg:text-[4rem]">
+        {term ? term.termName : 'Jawatankuasa Pusat'}
+      </h1>
+      {term?.theme && (
+        <p class="mt-5 max-w-2xl border-l border-gold-400/60 pl-6 text-base leading-8 text-slate-300 sm:text-lg">
+          {term.theme}
+        </p>
+      )}
+    </div>
+  </section>
+
+  <!-- ═══════════ AMANAT PRESIDEN ═══════════ -->
+  {term?.presidentMessage && (
+    <section class="border-y border-navy-900/10 bg-white">
+      <div class="container-site flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
+        <div class="flex items-center gap-4">
+          <span class="text-[0.65rem] font-bold tracking-[0.22em] text-gold-500 uppercase">Amanat Presiden</span>
+          <span class="hidden h-5 w-px bg-navy-900/15 sm:block"></span>
+          <p class="max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">"{term.presidentMessage}"</p>
+        </div>
+        <a href="/mengenai/" class="link-arrow shrink-0 text-[0.6rem]">Baca Penuh <Icon name="arrow" /></a>
+      </div>
+    </section>
+  )}
+
+  <!-- ═══════════ SENARAI JAWATANKUASA ═══════════ -->
+  {displayGroups.map((groupName) => {
+    const groupMembers = grouped[groupName];
+    if (!groupMembers || groupMembers.length === 0) return null;
+
+    return (
+      <section class:list={['section-pad', groupName === 'Kepimpinan Utama' ? 'bg-white' : 'bg-cream-50 border-t border-navy-900/8']}>
+        <div class="container-site">
+          <div class="flex items-center gap-4 border-b border-navy-900/15 pb-5">
+            <span class="font-serif text-2xl text-gold-500">
+              {String(displayGroups.indexOf(groupName) + 1).padStart(2, '0')}
+            </span>
+            <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem]">
+              {groupLabels[groupName]}
+            </h2>
+          </div>
+
+          <div class="mt-8 grid grid-cols-2 gap-5 sm:gap-6 mx-auto max-w-2xl">
+            {groupMembers.map((member) => (
+              <CommitteeMemberCard member={member} />
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  })}
+
+  <!-- ═══════════ PENCAPAIAN ═══════════ -->
+  {term && (await getAchievementsByTerm(term.slug)).length > 0 && (
+    <section class="bg-white section-pad border-t border-navy-900/10">
+      <div class="container-site">
+        <p class="eyebrow">Pencapaian</p>
+        <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem]">Pencapaian & Inisiatif Penggal Semasa</h2>
+        <div class="mt-10 space-y-6">
+          {(await getAchievementsByTerm(term.slug)).map((achievement) => (
+            <article class="group border-l-2 border-gold-400 pl-6 transition-all duration-[var(--transition-fast)] hover:border-gold-500">
+              <span class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">{achievement.category}</span>
+              <h3 class="mt-1 font-serif text-2xl font-normal text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">
+                <a href={`/berita/${achievement.slug}/`}>{achievement.title}</a>
+              </h3>
+              <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-600">{achievement.excerpt}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ═══════════ CTA KE AHLIAN ═══════════ -->
+  <section class="bg-navy-900 section-pad">
+    <div class="container-site text-center">
+      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Bersama PESUMA</p>
+      <h2 class="mx-auto mt-7 max-w-3xl font-serif text-[1.875rem] leading-[1.12] font-normal text-white sm:text-[2.25rem] lg:text-[2.75rem]">
+        Sertai komuniti yang diterajui barisan profesional ini.
+      </h2>
+      <p class="mx-auto mt-6 max-w-2xl text-sm leading-7 text-slate-300">Jadilah sebahagian daripada jaringan Pesuruhjaya Sumpah yang berkembang melalui ilmu, kebajikan dan jaringan berintegriti.</p>
+      <a href="/keahlian/" class="btn-primary mt-9">Daftar Sebagai Ahli <Icon name="arrow" /></a>
+    </div>
+  </section>
+</BaseLayout>

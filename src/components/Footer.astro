@@ -1,21 +1,21 @@
 ---
 import Logo from './Logo.astro';
 import Icon from './Icon.astro';
-import { navigation, site } from '../data/site';
+import { site } from '../data/site';
 
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-navy-950 text-white">
-  <div class="container-site grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-[1.3fr_0.8fr_0.8fr_1fr]">
+<footer class="border-t-4 border-gold-400 bg-navy-950 text-white">
+  <div class="container-site grid gap-14 py-20 md:grid-cols-2 lg:grid-cols-[1.45fr_0.75fr_0.75fr_1fr]">
     <div>
       <Logo light />
-      <p class="mt-6 max-w-sm text-sm leading-7 text-slate-300">
-        Platform profesional untuk kebajikan, pembangunan ilmu dan jaringan komuniti Pesuruhjaya Sumpah Malaysia.
+      <p class="mt-7 max-w-md font-serif text-xl leading-8 text-slate-300">
+        Menyatukan komuniti, memperkukuh amalan dan memelihara integriti profesion.
       </p>
-      <div class="mt-6 flex gap-3" aria-label="Media sosial">
+      <div class="mt-8 flex gap-3" aria-label="Media sosial">
         {['f', 'in', 'ig'].map((label) => (
-          <a href="#" aria-label={`PESUMA di ${label}`} class="flex size-10 items-center justify-center rounded-lg border border-white/15 text-xs font-black text-slate-300 transition hover:border-gold-300 hover:text-gold-300">
+          <a href="#" aria-label={`PESUMA di ${label}`} class="flex size-9 items-center justify-center rounded-sm border border-white/15 text-[0.65rem] font-black text-slate-400 transition hover:border-gold-300 hover:text-gold-300">
             {label}
           </a>
         ))}
@@ -23,26 +23,28 @@ const year = new Date().getFullYear();
     </div>
 
     <div>
-      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Pautan Pantas</h2>
+      <h2 class="text-[0.65rem] font-extrabold tracking-[0.2em] text-gold-300 uppercase">Pautan Pantas</h2>
       <ul class="mt-5 space-y-3">
-        {navigation.slice(0, 4).map((item) => (
-          <li><a href={item.href} class="text-sm text-slate-300 hover:text-white">{item.label}</a></li>
-        ))}
+        <li><a href="/mengenai/" class="text-sm text-slate-300 hover:text-white">Tentang PESUMA</a></li>
+        <li><a href="/jawatankuasa/" class="text-sm text-slate-300 hover:text-white">Jawatankuasa</a></li>
+        <li><a href="/keahlian/" class="text-sm text-slate-300 hover:text-white">Keahlian</a></li>
+        <li><a href="/berita/" class="text-sm text-slate-300 hover:text-white">Berita & Acara</a></li>
       </ul>
     </div>
 
     <div>
-      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Maklumat</h2>
+      <h2 class="text-[0.65rem] font-extrabold tracking-[0.2em] text-gold-300 uppercase">Maklumat</h2>
       <ul class="mt-5 space-y-3">
         <li><a href="/keahlian/" class="text-sm text-slate-300 hover:text-white">Keahlian</a></li>
-        <li><a href="/sumber/" class="text-sm text-slate-300 hover:text-white">Sumber</a></li>
+        <li><a href="/jawatankuasa/" class="text-sm text-slate-300 hover:text-white">Jawatankuasa</a></li>
+        <li><a href="/berita/" class="text-sm text-slate-300 hover:text-white">Berita & Acara</a></li>
         <li><a href="/kedai/" class="text-sm text-slate-300 hover:text-white">Kedai PESUMA</a></li>
         <li><a href={site.epjsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-sm text-slate-300 hover:text-white">Portal ePJS <Icon name="external" size={14} /></a></li>
       </ul>
     </div>
 
     <div>
-      <h2 class="text-sm font-extrabold tracking-wider text-gold-300 uppercase">Hubungi Kami</h2>
+      <h2 class="text-[0.65rem] font-extrabold tracking-[0.2em] text-gold-300 uppercase">Hubungi Kami</h2>
       <p class="mt-5 text-sm leading-6 text-slate-300">Sekretariat PESUMA<br />Malaysia</p>
       <a href={`mailto:${site.email}`} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold-300">
         <Icon name="mail" size={18} /> {site.email}

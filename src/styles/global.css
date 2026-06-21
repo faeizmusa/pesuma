@@ -1,17 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-navy-950: #06152e;
-  --color-navy-900: #071b3a;
-  --color-navy-800: #0b2448;
-  --color-navy-700: #102e5c;
-  --color-gold-300: #f8d477;
-  --color-gold-400: #f2b705;
-  --color-gold-500: #d4a017;
-  --color-cream-50: #fffdf7;
-  --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --shadow-soft: 0 18px 50px -24px rgb(7 27 58 / 0.22);
-  --shadow-card: 0 20px 45px -30px rgb(7 27 58 / 0.28);
+  /* ── Palette PESUMA ── */
+  --color-navy-950: #050d1c;
+  --color-navy-900: #08162c;
+  --color-navy-800: #0e2240;
+  --color-navy-700: #18365d;
+  --color-gold-300: #dcc88e;
+  --color-gold-400: #c7a449;
+  --color-gold-500: #a98532;
+  --color-cream-50: #f7f5ef;
+
+  /* ── Typography ── */
+  --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-serif: "Iowan Old Style", "Baskerville", "Times New Roman", serif;
+
+  /* ── Consistent Border Radius ── */
+  --radius-xs: 1px;
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-full: 9999px;
+
+  /* ── Shadows (restrained) ── */
+  --shadow-soft: 0 24px 70px -38px rgb(5 13 28 / 0.3);
+  --shadow-card: 0 18px 45px -34px rgb(5 13 28 / 0.28);
+
+  /* ── Motion / Transitions ── */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* ── Icon System ── */
+  --icon-size: 18px;
+  --icon-stroke: 1.8;
+  --icon-size-sm: 15px;
+  --icon-size-lg: 24px;
+
+  /* ── Typescale System ──
+     Nota: Nilai ini digunakan terus dalam utility classes,
+     bukan sebagai CSS variables. Tailwind v4 tidak boleh
+     guna var() dalam text-[...] kerana conflict dengan color. */
+
+  /* ── Focus Ring ── */
+  --ring-width: 2px;
 }
 
 @layer base {
@@ -21,11 +53,11 @@
   }
 
   body {
-    @apply bg-slate-50 font-sans text-slate-900 antialiased;
+    @apply bg-cream-50 font-sans text-slate-900 antialiased;
   }
 
   ::selection {
-    @apply bg-gold-300 text-navy-950;
+    @apply bg-gold-300/70 text-navy-950;
   }
 
   a,
@@ -34,54 +66,86 @@
   }
 
   :focus-visible {
-    @apply ring-3 ring-gold-400 ring-offset-3;
+    @apply ring-2 ring-gold-400 ring-offset-2;
   }
 }
 
 @layer components {
+  /* ── Container ── */
   .container-site {
-    @apply mx-auto w-full max-w-7xl px-5 sm:px-7 lg:px-10;
+    @apply mx-auto w-full max-w-[88rem] px-5 sm:px-8 lg:px-12;
   }
 
+  /* ── Section Spacing ── */
   .section-pad {
     @apply py-20 sm:py-24 lg:py-28;
   }
 
+  /* ── Eyebrow label ── */
   .eyebrow {
-    @apply mb-4 inline-flex items-center gap-2 text-xs font-bold tracking-[0.18em] text-gold-500 uppercase;
+    @apply mb-5 inline-flex items-center gap-3 text-[0.68rem] font-bold tracking-[0.24em] text-gold-500 uppercase;
   }
 
   .eyebrow::before {
     content: "";
-    @apply h-px w-7 bg-gold-500;
+    @apply h-px w-9 bg-gold-500;
   }
 
+  /* ── Section Heading ── */
   .section-title {
-    @apply max-w-3xl text-3xl leading-tight font-extrabold tracking-tight text-navy-900 sm:text-4xl lg:text-[2.75rem];
+    @apply max-w-4xl font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem] lg:text-[2.75rem];
   }
 
   .section-copy {
-    @apply mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg;
+    @apply mt-6 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg;
   }
 
+  /* ── Buttons ── */
   .btn-primary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-gold-400 px-6 py-3 text-sm font-extrabold text-navy-950 shadow-lg shadow-gold-500/15 transition hover:-translate-y-0.5 hover:bg-gold-300;
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm bg-gold-400 px-7 py-3
+      text-xs font-extrabold tracking-[0.08em] text-navy-950 uppercase
+      transition-all duration-[var(--transition-fast)]
+      hover:bg-gold-300 hover:shadow-sm
+      focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-bold text-navy-900 transition hover:-translate-y-0.5 hover:border-navy-700 hover:bg-slate-50;
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm border border-navy-900/25 bg-transparent px-7 py-3
+      text-xs font-extrabold tracking-[0.08em] text-navy-900 uppercase
+      transition-all duration-[var(--transition-fast)]
+      hover:border-navy-900 hover:bg-navy-900 hover:text-white;
   }
 
   .btn-secondary-dark {
-    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-white/25 bg-white/8 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition hover:-translate-y-0.5 hover:border-gold-300/70 hover:bg-white/14;
+    @apply inline-flex min-h-12 items-center justify-center gap-3 rounded-sm border border-white/30 bg-transparent px-7 py-3
+      text-xs font-extrabold tracking-[0.08em] text-white uppercase
+      transition-all duration-[var(--transition-fast)]
+      hover:border-gold-300/70 hover:text-gold-300;
   }
 
+  /* ── Card ── */
   .card {
-    @apply rounded-2xl border border-slate-200/80 bg-white shadow-card transition duration-300 hover:-translate-y-1 hover:border-gold-500/35 hover:shadow-soft;
+    @apply rounded-sm border border-slate-200/90 bg-white
+      shadow-card transition-all duration-[var(--transition-base)]
+      hover:border-gold-500/40 hover:shadow-soft;
   }
 
+  /* ── Icon shell (for feature icons) ── */
   .icon-shell {
-    @apply flex size-12 shrink-0 items-center justify-center rounded-xl bg-navy-900 text-gold-300;
+    @apply flex size-11 shrink-0 items-center justify-center rounded-sm border border-gold-400/35 bg-navy-900 text-gold-300;
+  }
+
+  /* ── Underline link style ── */
+  .link-arrow {
+    @apply inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.1em] text-navy-900 uppercase
+      transition-colors duration-[var(--transition-fast)]
+      hover:text-gold-500;
+  }
+
+  .link-arrow\:light {
+    @apply inline-flex items-center gap-2 text-xs font-extrabold tracking-[0.1em] text-slate-200 uppercase
+      transition-colors duration-[var(--transition-fast)]
+      hover:text-gold-300;
   }
 }
 

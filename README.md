@@ -45,3 +45,7 @@ Semak dan ganti sebelum produksi:
 - pautan media sosial
 - logo dan aset rasmi PESUMA
 - mod storage Keystatic
+
+## Logo rasmi
+
+Logo rasmi web disimpan sebagai `public/logo-pesuma.svg`, dengan versi PNG dan favicon khusus dalam direktori `public/`. Gunakan fail SVG untuk paparan laman dan elakkan mengubah nisbah, warna atau bentuk asal logo.

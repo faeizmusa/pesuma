@@ -1,0 +1,120 @@
+---
+export type GalleryItem = {
+  image: string;
+  caption?: string;
+};
+
+interface Props {
+  images: GalleryItem[];
+}
+
+const { images } = Astro.props;
+const galleryId = `g-${Math.random().toString(36).slice(2, 8)}`;
+---
+
+{images.length > 0 && (
+  <div
+    class="not-prose my-10"
+    data-gallery-id={galleryId}
+    data-gallery={JSON.stringify(images.map((img) => ({ image: img.image, caption: img.caption || '' })))}
+  >
+    <div class="flex items-center gap-3 border-b border-navy-900/15 pb-4">
+      <span class="text-[0.65rem] font-bold tracking-[0.2em] text-gold-500 uppercase">Galeri Gambar</span>
+      <span class="text-xs text-slate-400">({images.length} gambar)</span>
+    </div>
+
+    <div class="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+      {images.map((item, index) => (
+        <button
+          data-index={index}
+          class="group relative aspect-[4/3] overflow-hidden rounded-[6px] border border-navy-900/10 bg-navy-900 transition-all duration-[var(--transition-fast)] hover:border-gold-400/40 hover:shadow-soft"
+          aria-label={item.caption || 'Buka gambar'}
+          type="button"
+        >
+          <img
+            src={item.image}
+            alt={item.caption || ''}
+            class="h-full w-full object-cover transition-transform duration-[var(--transition-base)] group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+          {item.caption && (
+            <div class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-3 opacity-0 transition-opacity duration-[var(--transition-fast)] group-hover:opacity-100">
+              <span class="text-[0.6rem] font-medium text-white/90 line-clamp-1">{item.caption}</span>
+            </div>
+          )}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
+<script>
+  const containers = document.querySelectorAll('[data-gallery-id]') as unknown as HTMLElement[];
+  containers.forEach((el: HTMLElement) => {
+    const id = el.dataset.galleryId || '';
+    const raw = el.dataset.gallery || '[]';
+    const images: { image: string; caption: string }[] = JSON.parse(raw);
+    if (images.length === 0) return;
+
+    const old = document.getElementById('lb-' + id);
+    if (old) old.remove();
+
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lb-' + id;
+    lightbox.className = 'fixed inset-0 z-[200] hidden items-center justify-center bg-black/85 p-4 backdrop-blur-sm';
+    lightbox.innerHTML = [
+      '<button class="lb-close absolute top-4 right-4 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20" type="button" aria-label="Tutup">',
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>',
+      '<button class="lb-prev absolute left-4 top-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20" type="button" aria-label="Sebelum">',
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg></button>',
+      '<div class="flex max-h-[85vh] max-w-4xl flex-col items-center">',
+        '<img class="lb-img max-h-[75vh] w-auto max-w-full rounded-[6px] object-contain" src="" alt="" />',
+        '<p class="lb-caption mt-4 text-sm text-white/70 text-center max-w-lg"></p>',
+      '</div>',
+      '<button class="lb-next absolute right-4 top-1/2 -translate-y-1/2 flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20" type="button" aria-label="Seterusnya">',
+        '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg></button>',
+    ].join('');
+    document.body.appendChild(lightbox);
+
+    const imgEl = lightbox.querySelector('.lb-img') as HTMLImageElement | null;
+    const captionEl = lightbox.querySelector('.lb-caption') as HTMLElement | null;
+    const thumbs = el.querySelectorAll('[data-index]');
+    let current = 0;
+
+    function open(i: number) {
+      if (i < 0 || i >= images.length) return;
+      current = i;
+      if (imgEl) {
+        imgEl.src = images[i].image;
+        imgEl.alt = images[i].caption || '';
+      }
+      if (captionEl) {
+        captionEl.textContent = images[i].caption || '';
+        captionEl.style.display = images[i].caption ? 'block' : 'none';
+      }
+      lightbox.classList.remove('hidden');
+      lightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lightbox.classList.add('hidden');
+      lightbox.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    thumbs.forEach(function(thumb, i) { thumb.addEventListener('click', function() { open(i); }); });
+    const closeBtn = lightbox.querySelector('.lb-close') as HTMLElement | null;
+    const prevBtn = lightbox.querySelector('.lb-prev') as HTMLElement | null;
+    const nextBtn = lightbox.querySelector('.lb-next') as HTMLElement | null;
+    if (closeBtn) closeBtn.addEventListener('click', close);
+    if (prevBtn) prevBtn.addEventListener('click', function() { open(current - 1); });
+    if (nextBtn) nextBtn.addEventListener('click', function() { open(current + 1); });
+    document.addEventListener('keydown', function(e: KeyboardEvent) {
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') open(current - 1);
+      if (e.key === 'ArrowRight') open(current + 1);
+    });
+    lightbox.addEventListener('click', function(e: MouseEvent) { if (e.target === lightbox) close(); });
+  });
+</script>

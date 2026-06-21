@@ -3,6 +3,7 @@ export const prerender = true;
 
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import VisualPlaceholder from '../components/VisualPlaceholder.astro';
 import { audiences, benefits, products, quickActions, resources, site } from '../data/site';
 import { getFeaturedEvent, getLatestPosts } from '../lib/content';
 
@@ -19,73 +20,78 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
 ---
 
 <BaseLayout>
+  <!-- ═══════════ HERO ═══════════ -->
   <section class="relative overflow-hidden bg-navy-950 text-white">
-    <div class="absolute inset-0 opacity-80" aria-hidden="true">
-      <div class="absolute -top-40 left-1/2 size-[34rem] rounded-full bg-navy-700/40 blur-3xl"></div>
-      <div class="absolute -right-40 -bottom-40 size-[30rem] rounded-full bg-gold-500/10 blur-3xl"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-y-0 right-0 w-1/2 border-l border-white/6 bg-[linear-gradient(135deg,rgba(199,164,73,0.08),transparent_55%)]"></div>
+      <!-- Subtle geometric circles -->
+      <div class="absolute top-0 right-0 size-[44rem] translate-x-1/3 -translate-y-1/3 rounded-full border border-gold-400/10"></div>
+      <div class="absolute top-0 right-0 size-[34rem] translate-x-1/3 -translate-y-1/3 rounded-full border border-gold-400/10"></div>
     </div>
-    <div class="container-site relative grid min-h-[720px] items-center gap-14 py-20 lg:grid-cols-[1.08fr_0.92fr] lg:py-24">
-      <div>
-        <p class="mb-6 inline-flex items-center gap-2 rounded-full border border-gold-300/25 bg-gold-300/8 px-4 py-2 text-xs font-bold tracking-[0.12em] text-gold-300 uppercase">
-          <span class="size-1.5 rounded-full bg-gold-400"></span>
-          Berkhidmat Berintegriti
-        </p>
-        <h1 class="max-w-4xl text-4xl leading-[1.08] font-black tracking-tight text-balance sm:text-5xl lg:text-[3.85rem]">
-          Pertubuhan Profesional Untuk <span class="text-gold-300">Pesuruhjaya Sumpah Malaysia</span>
+
+    <div class="container-site relative grid min-h-[720px] items-center gap-14 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
+      <div class="max-w-4xl">
+        <p class="mb-8 text-[0.68rem] font-bold tracking-[0.28em] text-gold-300 uppercase">Berkhidmat Berintegriti</p>
+        <h1 class="font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.03em] text-balance sm:text-[3.25rem] lg:text-[4rem]">
+          Persatuan profesional bagi <em class="font-normal text-gold-300 not-italic">Pesuruhjaya Sumpah</em> Malaysia
         </h1>
-        <p class="mt-7 max-w-2xl text-base leading-8 text-slate-300 sm:text-lg">
-          PESUMA menyatukan komuniti Pesuruhjaya Sumpah seluruh Malaysia melalui kebajikan ahli, pembangunan profesional, program latihan, rujukan amalan dan jaringan berintegriti.
+        <p class="mt-8 max-w-2xl border-l border-gold-400/60 pl-6 text-base leading-8 text-slate-300 sm:text-lg">
+          PESUMA menyatukan komuniti melalui kebajikan ahli, pembangunan profesional, program ilmu, sumber rujukan dan jaringan yang berintegriti.
         </p>
-        <div class="mt-9 flex flex-col gap-3 sm:flex-row">
-          <a href="/keahlian/" class="btn-primary">Jadi Ahli PESUMA <Icon name="arrow" size={18} /></a>
-          <a href="#program" class="btn-secondary-dark">Lihat Program Terkini</a>
-        </div>
-        <div class="mt-10 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/10 pt-6 text-xs font-semibold text-slate-300">
-          {['Kebajikan Ahli', 'Pembangunan Profesional', 'Jaringan Seluruh Malaysia'].map((item) => (
-            <span class="inline-flex items-center gap-2"><Icon name="check" size={15} /> {item}</span>
-          ))}
+        <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+          <a href="/keahlian/" class="btn-primary">Jadi Ahli PESUMA <Icon name="arrow" /></a>
+          <a href="#program" class="btn-secondary-dark">Program Terkini</a>
         </div>
       </div>
 
-      <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
-        <div class="absolute -inset-4 rounded-[2.25rem] border border-white/8"></div>
-        <img
-          src="/hero-community.svg"
-          width="900"
-          height="700"
-          alt="Ilustrasi program dan komuniti profesional PESUMA"
-          class="relative aspect-[9/7] w-full rounded-3xl object-cover shadow-2xl shadow-black/30"
-          fetchpriority="high"
-        />
-        <div class="absolute -bottom-5 left-4 rounded-2xl border border-white/15 bg-white/95 p-4 text-navy-900 shadow-xl backdrop-blur sm:left-8 sm:p-5">
-          <p class="text-xs font-extrabold tracking-wider text-gold-500 uppercase">Komuniti Profesional</p>
-          <p class="mt-1 text-sm font-bold sm:text-base">Ilmu • Kebajikan • Jaringan</p>
+      <div class="relative hidden min-h-[480px] lg:block">
+        <div class="absolute top-0 right-0 h-full w-[82%] border border-white/10 bg-white/[0.025]"></div>
+        <div class="absolute top-10 right-10 flex h-[calc(100%-5rem)] w-[82%] flex-col justify-between border border-gold-400/25 p-10">
+          <div class="flex items-start justify-between">
+            <span class="text-[0.62rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Ditubuhkan untuk komuniti</span>
+            <span class="font-serif text-5xl text-white/10">P</span>
+          </div>
+          <img src="/logo-pesuma.png" width="546" height="546" alt="Logo rasmi PESUMA" class="mx-auto w-52 drop-shadow-2xl" loading="eager" />
+          <div class="grid grid-cols-3 border-t border-white/10 pt-6 text-center">
+            <div><strong class="block font-serif text-2xl font-normal text-gold-300">Ilmu</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Pembangunan</span></div>
+            <div class="border-x border-white/10"><strong class="block font-serif text-2xl font-normal text-gold-300">Bakti</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Kebajikan</span></div>
+            <div><strong class="block font-serif text-2xl font-normal text-gold-300">Jaringan</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Komuniti</span></div>
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- Value bar -->
+    <div class="border-t border-white/10">
+      <div class="container-site grid divide-y divide-white/10 sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        {['Kebajikan Ahli', 'Pembangunan Profesional', 'Jaringan Seluruh Malaysia'].map((item, index) => (
+          <div class="flex items-center gap-4 py-5 sm:px-6 first:sm:pl-0">
+            <span class="font-serif text-xl text-gold-300">0{index + 1}</span>
+            <span class="text-[0.68rem] font-bold tracking-[0.14em] text-slate-300 uppercase">{item}</span>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="relative z-10 -mt-1 bg-slate-50 section-pad">
+  <!-- ═══════════ QUICK LINKS ═══════════ -->
+  <section class="bg-cream-50 py-10 sm:py-14">
     <div class="container-site">
-      <div class="text-center">
-        <p class="eyebrow">Akses pantas</p>
-        <h2 class="section-title mx-auto">Cari Maklumat Dengan Lebih Mudah</h2>
-        <p class="section-copy mx-auto">Laluan ringkas ke maklumat yang paling kerap diperlukan oleh ahli, komuniti dan orang awam.</p>
-      </div>
-
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {quickActions.map((item) => (
+      <div class="grid border-y border-navy-900/15 sm:grid-cols-2 lg:grid-cols-3">
+        {quickActions.map((item, index) => (
           <a
             href={item.href}
             target={item.external ? '_blank' : undefined}
             rel={item.external ? 'noopener noreferrer' : undefined}
-            class="card group flex min-h-56 flex-col p-6 sm:p-7"
+            class="group flex min-h-32 items-start gap-5 border-b border-navy-900/15 py-7 sm:px-7 sm:nth-[2n]:border-l lg:border-l lg:nth-[3n+1]:border-l-0 lg:nth-last-[-n+3]:border-b-0"
           >
-            <span class="icon-shell transition group-hover:bg-gold-400 group-hover:text-navy-950"><Icon name={item.icon} /></span>
-            <h3 class="mt-6 text-lg font-extrabold text-navy-900">{item.title}</h3>
-            <p class="mt-2 text-sm leading-6 text-slate-600">{item.text}</p>
-            <span class="mt-auto flex items-center gap-2 pt-5 text-sm font-bold text-navy-700">
-              Terokai <Icon name={item.external ? 'external' : 'arrow'} size={17} />
+            <span class="pt-1 font-serif text-xl text-gold-500">0{index + 1}</span>
+            <span class="flex-1">
+              <strong class="block font-serif text-xl font-normal text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">{item.title}</strong>
+              <span class="mt-2 block text-sm leading-6 text-slate-600">{item.text}</span>
+            </span>
+            <span class="mt-1 shrink-0 text-navy-900 transition-transform duration-[var(--transition-fast)] group-hover:translate-x-1">
+              <Icon name={item.external ? 'external' : 'arrow'} />
             </span>
           </a>
         ))}
@@ -93,239 +99,221 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
     </div>
   </section>
 
-  <section class="overflow-hidden bg-white section-pad">
-    <div class="container-site grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
-      <div class="relative">
-        <div class="aspect-[4/3] overflow-hidden rounded-3xl bg-navy-900 p-7 sm:p-10">
-          <div class="flex h-full flex-col justify-between rounded-2xl border border-white/12 bg-gradient-to-br from-white/10 to-transparent p-7 sm:p-9">
-            <span class="flex size-16 items-center justify-center rounded-2xl bg-gold-400 text-2xl font-black text-navy-950">P</span>
-            <div>
-              <p class="text-sm font-bold tracking-[0.16em] text-gold-300 uppercase">PESUMA</p>
-              <p class="mt-4 max-w-sm text-2xl leading-snug font-extrabold text-white sm:text-3xl">Memperkasa komuniti melalui ilmu, sokongan dan hubungan profesional.</p>
-            </div>
-          </div>
-        </div>
-        <div class="absolute -right-3 -bottom-6 w-44 rounded-2xl bg-gold-400 p-5 text-navy-950 shadow-xl sm:right-8 sm:w-52">
-          <p class="text-3xl font-black">Malaysia</p>
-          <p class="mt-1 text-xs leading-5 font-bold">Jaringan ahli merentasi negeri dan wilayah</p>
-        </div>
-      </div>
+  <!-- ═══════════ TENTANG PESUMA ═══════════ -->
+  <section class="bg-white section-pad">
+    <div class="container-site grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
       <div>
         <p class="eyebrow">Mengenai PESUMA</p>
-        <h2 class="section-title">Payung Profesional Untuk Komuniti Pesuruhjaya Sumpah</h2>
-        <p class="section-copy">
-          PESUMA berperanan sebagai wadah gabungan, sokongan dan pembangunan profesional kepada Pesuruhjaya Sumpah di Malaysia. Melalui program ilmu, aktiviti kebajikan, jaringan ahli dan sumber rujukan, PESUMA membantu memperkukuh amalan yang berintegriti, tersusun dan selari dengan keperluan semasa.
-        </p>
-        <a href="/mengenai/" class="btn-secondary mt-8">Ketahui Mengenai PESUMA <Icon name="arrow" size={18} /></a>
+        <VisualPlaceholder variant="cream" aspect="square" />
+      </div>
+      <div class="lg:pt-14">
+        <h2 class="section-title">Sebuah wadah yang menyatukan profesion, ilmu dan kebajikan.</h2>
+        <div class="mt-9 grid gap-8 border-t border-navy-900/15 pt-8 md:grid-cols-[1fr_0.8fr]">
+          <p class="text-lg leading-9 text-slate-700">
+            PESUMA berperanan sebagai platform gabungan, sokongan dan pembangunan profesional kepada Pesuruhjaya Sumpah di Malaysia—membantu memperkukuh amalan yang tersusun, relevan dan berintegriti.
+          </p>
+          <div>
+            <p class="text-sm leading-7 text-slate-600">Melalui program ilmu, aktiviti kebajikan, jaringan ahli dan sumber rujukan, komuniti dapat berkembang bersama keperluan semasa.</p>
+            <a href="/mengenai/" class="link-arrow mt-7">Kenali PESUMA <Icon name="arrow" /></a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══════════ AUDIENS ═══════════ -->
   <section class="bg-navy-900 text-white section-pad">
     <div class="container-site">
-      <div class="max-w-3xl">
-        <p class="eyebrow">Untuk semua</p>
-        <h2 class="text-3xl leading-tight font-extrabold tracking-tight sm:text-4xl">Apa Yang Anda Boleh Dapatkan Di Laman Ini?</h2>
+      <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div>
+          <p class="eyebrow">Untuk komuniti</p>
+          <h2 class="max-w-xl font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem]">Maklumat yang relevan untuk setiap lapisan pengguna.</h2>
+          <p class="mt-7 max-w-md text-sm leading-7 text-slate-300">Daripada ahli PESUMA hingga orang awam dan organisasi yang ingin memahami peranan Pesuruhjaya Sumpah.</p>
+        </div>
+        <div class="border-t border-white/15">
+          {audiences.map((item) => (
+            <article class="grid gap-4 border-b border-white/15 py-8 sm:grid-cols-[4rem_0.8fr_1fr] sm:items-start">
+              <span class="font-serif text-2xl text-gold-300">{item.number}</span>
+              <h3 class="font-serif text-2xl font-normal">{item.title}</h3>
+              <p class="text-sm leading-7 text-slate-300">{item.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
-      <div class="mt-12 grid gap-px overflow-hidden rounded-3xl bg-white/12 md:grid-cols-3">
-        {audiences.map((item) => (
-          <article class="bg-navy-900 p-7 sm:p-9">
-            <span class="text-sm font-black text-gold-300">{item.number}</span>
-            <h3 class="mt-8 text-xl font-extrabold">{item.title}</h3>
-            <p class="mt-3 text-sm leading-7 text-slate-300">{item.text}</p>
-          </article>
-        ))}
-      </div>
-      <p class="mt-8 max-w-4xl border-l-2 border-gold-400 pl-5 text-sm leading-7 text-slate-300">
+      <p class="mt-10 max-w-5xl border-l border-gold-400 pl-6 text-xs leading-6 text-slate-400">
         Maklumat rasmi berkaitan pelantikan, direktori, peraturan dan status Pesuruhjaya Sumpah hendaklah dirujuk kepada portal rasmi pihak berkuasa berkaitan.
       </p>
     </div>
   </section>
 
+  <!-- ═══════════ KEABILAN ═══════════ -->
   <section class="bg-cream-50 section-pad">
     <div class="container-site">
-      <div class="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between">
+      <div class="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
         <div>
-          <p class="eyebrow">Keahlian</p>
-          <h2 class="section-title">Kenapa Sertai PESUMA?</h2>
-          <p class="section-copy">Keahlian yang menghubungkan anda dengan ilmu, sokongan dan komuniti profesional yang berkongsi matlamat.</p>
+          <p class="eyebrow">Keahlian PESUMA</p>
+          <h2 class="section-title">Lebih daripada sebuah keahlian.</h2>
+          <p class="section-copy">Ia adalah akses kepada komuniti, ilmu dan sokongan yang memahami realiti profesion.</p>
+          <a href="/keahlian/" class="btn-primary mt-9">Daftar Sebagai Ahli <Icon name="arrow" /></a>
         </div>
-        <a href="/keahlian/" class="btn-primary shrink-0">Daftar Sebagai Ahli <Icon name="arrow" size={18} /></a>
-      </div>
-
-      <div class="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-        {benefits.map((item, index) => (
-          <article class:list={['card p-6', index === 0 && 'sm:col-span-2 lg:col-span-1']}>
-            <span class="icon-shell"><Icon name={item.icon} /></span>
-            <h3 class="mt-6 text-lg leading-snug font-extrabold text-navy-900">{item.title}</h3>
-            <p class="mt-3 text-sm leading-6 text-slate-600">{item.text}</p>
-          </article>
-        ))}
+        <div class="grid border-t border-navy-900/15 sm:grid-cols-2">
+          {benefits.map((item, index) => (
+            <article class:list={['border-b border-navy-900/15 py-8 sm:px-8', index % 2 === 1 && 'sm:border-l', index === benefits.length - 1 && 'sm:col-span-2']}>
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-serif text-2xl font-normal text-navy-900">{item.title}</h3>
+                <span class="text-[0.65rem] font-bold tracking-widest text-gold-500">0{index + 1}</span>
+              </div>
+              <p class="mt-4 max-w-xl text-sm leading-7 text-slate-600">{item.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══════════ BERITA & AKTIVITI ═══════════ -->
   <section class="bg-white section-pad">
     <div class="container-site">
-      <div class="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+      <div class="flex flex-col gap-8 border-b border-navy-900/15 pb-9 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <p class="eyebrow">Kemas kini komuniti</p>
-          <h2 class="section-title">Berita, Program & Aktiviti Terkini</h2>
+          <p class="eyebrow">Berita & perkembangan</p>
+          <h2 class="section-title">Dari komuniti PESUMA</h2>
         </div>
-        <a href="/berita/" class="hidden items-center gap-2 text-sm font-extrabold text-navy-700 hover:text-gold-500 sm:inline-flex">
-          Lihat Semua Berita & Acara <Icon name="arrow" size={18} />
-        </a>
+        <a href="/berita/" class="link-arrow">Semua Berita & Acara <Icon name="arrow" /></a>
       </div>
 
-      <div class="mt-12 grid gap-6 lg:grid-cols-3">
-        {posts.map((post, index) => (
-          <article class="card group overflow-hidden">
-            <div class:list={[
-              'relative flex aspect-[16/9] items-end overflow-hidden p-6',
-              index === 0 ? 'bg-navy-900' : index === 1 ? 'bg-slate-800' : 'bg-navy-700',
-            ]}>
-              <div class="absolute -top-12 -right-8 size-40 rounded-full border-[28px] border-gold-400/10"></div>
-              <div class="absolute right-12 -bottom-14 size-32 rotate-45 rounded-3xl bg-white/5"></div>
-              <span class="relative rounded-full bg-gold-400 px-3 py-1.5 text-[0.68rem] font-extrabold tracking-wider text-navy-950 uppercase">{post.category}</span>
-            </div>
-            <div class="p-6 sm:p-7">
-              <time datetime={post.date} class="text-xs font-bold text-slate-500">{formatDate(post.date)}</time>
-              <h3 class="mt-3 text-xl leading-snug font-extrabold text-navy-900 transition group-hover:text-navy-700">
-                <a href={`/berita/${post.slug}/`}>{post.title}</a>
-              </h3>
-              <p class="mt-3 text-sm leading-6 text-slate-600">{post.excerpt}</p>
-              <a href={`/berita/${post.slug}/`} class="mt-6 inline-flex items-center gap-2 text-sm font-extrabold text-navy-700">Baca Lanjut <Icon name="arrow" size={17} /></a>
-            </div>
+      <div class="mt-10 grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
+        {posts[0] && (
+          <article class="group border-b border-navy-900/15 pb-10 lg:border-r lg:border-b-0 lg:pr-12">
+            <VisualPlaceholder variant="navy" aspect="wide" label={posts[0].category} />
+            <time datetime={posts[0].date} class="mt-7 block text-[0.65rem] font-bold tracking-widest text-slate-500 uppercase">{formatDate(posts[0].date)}</time>
+            <h3 class="mt-4 max-w-3xl font-serif text-3xl leading-tight font-normal text-navy-900 sm:text-4xl">
+              <a href={`/berita/${posts[0].slug}/`} class="transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">{posts[0].title}</a>
+            </h3>
+            <p class="mt-4 max-w-2xl text-sm leading-7 text-slate-600">{posts[0].excerpt}</p>
           </article>
-        ))}
+        )}
+        <div class="divide-y divide-navy-900/15">
+          {posts.slice(1).map((post) => (
+            <article class="group py-8 first:pt-0">
+              <div class="flex items-center justify-between gap-4">
+                <span class="text-[0.62rem] font-bold tracking-[0.16em] text-gold-500 uppercase">{post.category}</span>
+                <time datetime={post.date} class="text-[0.62rem] text-slate-500">{formatDate(post.date)}</time>
+              </div>
+              <h3 class="mt-5 font-serif text-2xl leading-snug font-normal text-navy-900 sm:text-3xl">
+                <a href={`/berita/${post.slug}/`} class="transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">{post.title}</a>
+              </h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">{post.excerpt}</p>
+              <a href={`/berita/${post.slug}/`} class="link-arrow mt-5">Baca Lanjut <Icon name="arrow" /></a>
+            </article>
+          ))}
+        </div>
       </div>
-      <a href="/berita/" class="btn-secondary mt-8 w-full sm:hidden">Lihat Semua Berita & Acara</a>
     </div>
   </section>
 
-  <section class="bg-slate-100 section-pad">
-    <div class="container-site">
-      <div class="text-center">
-        <p class="eyebrow">Pusat rujukan</p>
-        <h2 class="section-title mx-auto">Sumber Penting Untuk Pesuruhjaya Sumpah</h2>
-        <p class="section-copy mx-auto">Akses lebih tersusun kepada maklumat rujukan dan pautan rasmi yang berkaitan dengan amalan.</p>
-      </div>
-      <div class="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {resources.map((item) => (
-          <a
-            href={item.href}
-            target={item.external ? '_blank' : undefined}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-            class="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-gold-500/40 hover:shadow-card"
-          >
-            <span class="icon-shell size-11"><Icon name={item.icon} size={21} /></span>
-            <span class="flex-1 text-sm font-extrabold text-navy-900">{item.title}</span>
-            <Icon name={item.external ? 'external' : 'arrow'} size={17} />
-          </a>
-        ))}
-      </div>
-      <p class="mx-auto mt-8 max-w-4xl text-center text-xs leading-6 text-slate-500">
-        PESUMA menyediakan pautan dan ringkasan rujukan untuk kemudahan pengguna. Untuk maklumat rasmi dan terkini, sila rujuk portal rasmi pihak berkuasa berkaitan.
-      </p>
-    </div>
-  </section>
-
-  <section id="program" class="overflow-hidden bg-white section-pad">
-    <div class="container-site grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
+  <!-- ═══════════ PROGRAM PILIHAN ═══════════ -->
+  <section id="program" class="bg-navy-950 text-white section-pad">
+    <div class="container-site grid gap-14 lg:grid-cols-[0.76fr_1.24fr] lg:gap-24">
       <div>
         <p class="eyebrow">Program pilihan</p>
-        <h2 class="section-title">Program Pembangunan Profesional</h2>
-        <p class="section-copy">
-          PESUMA menganjurkan dan menyokong program ilmu, seminar, bengkel serta aktiviti komuniti bagi memperkukuh kefahaman, amalan dan integriti Pesuruhjaya Sumpah.
-        </p>
-        <a href="/berita/" class="btn-secondary mt-8">Terokai Semua Program <Icon name="arrow" size={18} /></a>
+        <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem]">Pembangunan profesional yang relevan.</h2>
+        <p class="mt-7 max-w-lg text-base leading-8 text-slate-300">Program ilmu, seminar dan bengkel yang menyokong kefahaman, amalan serta integriti Pesuruhjaya Sumpah.</p>
       </div>
-
       {featuredEvent && (
-        <article class="relative overflow-hidden rounded-3xl bg-navy-900 p-7 text-white shadow-2xl shadow-navy-900/20 sm:p-10">
-          <div class="absolute top-0 right-0 size-64 rounded-full bg-gold-400/10 blur-2xl"></div>
-          <div class="relative">
-            <div class="flex flex-wrap items-center justify-between gap-4">
-              <span class="rounded-full bg-gold-400 px-3 py-1.5 text-xs font-extrabold text-navy-950">{featuredEvent.status}</span>
-              <span class="text-xs font-bold tracking-wider text-slate-300 uppercase">Acara Pilihan</span>
-            </div>
-            <h3 class="mt-8 max-w-xl text-2xl leading-tight font-extrabold sm:text-3xl">{featuredEvent.title}</h3>
-            <p class="mt-4 max-w-xl text-sm leading-7 text-slate-300">{featuredEvent.excerpt}</p>
-            <div class="mt-8 grid gap-4 border-y border-white/12 py-6 sm:grid-cols-2">
-              <div class="flex items-center gap-3">
-                <span class="text-gold-300"><Icon name="calendar" size={21} /></span>
-                <div><p class="text-[0.68rem] font-bold text-slate-400 uppercase">Tarikh</p><p class="mt-1 text-sm font-bold">{formatDate(featuredEvent.date)}</p></div>
-              </div>
-              <div class="flex items-center gap-3">
-                <span class="text-gold-300"><Icon name="location" size={21} /></span>
-                <div><p class="text-[0.68rem] font-bold text-slate-400 uppercase">Lokasi</p><p class="mt-1 text-sm font-bold">{featuredEvent.location}</p></div>
-              </div>
-            </div>
-            <a href={featuredEvent.registrationUrl || `/acara/${featuredEvent.slug}/`} class="btn-primary mt-7">Maklumat Lanjut <Icon name="arrow" size={18} /></a>
+        <article class="border-y border-white/15 py-9">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <span class="text-[0.65rem] font-bold tracking-[0.18em] text-gold-300 uppercase">{featuredEvent.status}</span>
+            <span class="text-[0.65rem] tracking-[0.18em] text-slate-500 uppercase">Acara pilihan</span>
           </div>
+          <h3 class="mt-8 max-w-3xl font-serif text-4xl leading-tight font-normal sm:text-5xl">{featuredEvent.title}</h3>
+          <p class="mt-5 max-w-2xl text-sm leading-7 text-slate-300">{featuredEvent.excerpt}</p>
+          <div class="mt-9 grid gap-6 border-t border-white/15 pt-7 sm:grid-cols-2">
+            <div><p class="text-[0.6rem] font-bold tracking-widest text-slate-500 uppercase">Tarikh</p><p class="mt-2 font-serif text-xl text-gold-300">{formatDate(featuredEvent.date)}</p></div>
+            <div><p class="text-[0.6rem] font-bold tracking-widest text-slate-500 uppercase">Lokasi</p><p class="mt-2 font-serif text-xl text-gold-300">{featuredEvent.location}</p></div>
+          </div>
+          <a href={featuredEvent.registrationUrl || `/acara/${featuredEvent.slug}/`} class="btn-primary mt-9">Maklumat Lanjut <Icon name="arrow" /></a>
         </article>
       )}
     </div>
   </section>
 
-  <section class="bg-gold-400">
-    <div class="container-site grid items-center gap-8 py-14 lg:grid-cols-[1fr_auto] lg:py-16">
-      <div class="flex gap-5">
-        <span class="hidden size-14 shrink-0 items-center justify-center rounded-2xl bg-navy-950 text-gold-300 sm:flex"><Icon name="search" size={27} /></span>
-        <div>
-          <h2 class="text-2xl leading-tight font-black text-navy-950 sm:text-3xl">Mencari Pesuruhjaya Sumpah Berdaftar?</h2>
-          <p class="mt-3 max-w-3xl text-sm leading-7 font-medium text-navy-950/75">
-            Untuk semakan direktori lantikan semasa, status lantikan atau maklumat rasmi berkaitan Pesuruhjaya Sumpah, sila rujuk portal rasmi ePJS yang disediakan oleh pihak berkuasa berkaitan.
-          </p>
-        </div>
+  <!-- ═══════════ SUMBER ═══════════ -->
+  <section class="bg-cream-50 section-pad">
+    <div class="container-site grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+      <div>
+        <p class="eyebrow">Pusat rujukan</p>
+        <h2 class="section-title">Sumber penting, dihimpunkan dengan lebih tersusun.</h2>
+        <p class="section-copy">Pautan pantas kepada panduan, borang dan sumber rasmi berkaitan amalan.</p>
       </div>
-      <a href={site.epjsUrl} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-navy-950 px-6 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5 hover:bg-navy-800">
-        Semak Direktori Rasmi ePJS <Icon name="external" size={17} />
+      <div class="border-t border-navy-900/15">
+        {resources.map((item, index) => (
+          <a
+            href={item.href}
+            target={item.external ? '_blank' : undefined}
+            rel={item.external ? 'noopener noreferrer' : undefined}
+            class="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-navy-900/15 py-6"
+          >
+            <span class="font-serif text-lg text-gold-500">0{index + 1}</span>
+            <span class="font-serif text-xl text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500 sm:text-2xl">{item.title}</span>
+            <span class="transition-transform duration-[var(--transition-fast)] group-hover:translate-x-1"><Icon name={item.external ? 'external' : 'arrow'} /></span>
+          </a>
+        ))}
+        <p class="mt-7 text-xs leading-6 text-slate-500">PESUMA menyediakan pautan dan ringkasan rujukan untuk kemudahan pengguna. Untuk maklumat rasmi dan terkini, sila rujuk portal rasmi pihak berkuasa berkaitan.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ EPJS CTA ═══════════ -->
+  <section class="border-y border-gold-400/35 bg-white">
+    <div class="container-site grid items-center gap-8 py-14 lg:grid-cols-[1fr_auto]">
+      <div>
+        <p class="text-[0.65rem] font-bold tracking-[0.2em] text-gold-500 uppercase">Direktori rasmi</p>
+        <h2 class="mt-4 font-serif text-3xl font-normal text-navy-900 sm:text-4xl">Mencari Pesuruhjaya Sumpah berdaftar?</h2>
+        <p class="mt-4 max-w-3xl text-sm leading-7 text-slate-600">Semakan direktori, status lantikan dan maklumat rasmi hendaklah dibuat melalui portal ePJS pihak berkuasa berkaitan.</p>
+      </div>
+      <a href={site.epjsUrl} target="_blank" rel="noopener noreferrer" class="btn-secondary group">
+        Semak Portal ePJS <Icon name="external" />
       </a>
     </div>
   </section>
 
+  <!-- ═══════════ KEDAI ═══════════ -->
   <section class="bg-white section-pad">
     <div class="container-site">
-      <div class="flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
+      <div class="grid gap-10 lg:grid-cols-[0.55fr_1.45fr]">
         <div>
           <p class="eyebrow">Kedai PESUMA</p>
-          <h2 class="section-title">Cenderahati & Keperluan Rasmi PESUMA</h2>
+          <h2 class="section-title">Identiti komuniti.</h2>
+          <a href="/kedai/" class="link-arrow mt-8">Lihat Kedai <Icon name="arrow" /></a>
         </div>
-        <a href="/kedai/" class="btn-secondary shrink-0">Lihat Kedai PESUMA <Icon name="arrow" size={18} /></a>
-      </div>
-      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product, index) => (
-          <article class="group">
-            <div class:list={[
-              'relative aspect-[4/3] overflow-hidden rounded-2xl',
-              product.tone === 'navy' ? 'bg-navy-900' : product.tone === 'gold' ? 'bg-gold-400' : 'bg-slate-200',
-            ]}>
-              <div class="absolute inset-8 rounded-[2rem] border border-white/20"></div>
-              <div class:list={[
-                'absolute top-1/2 left-1/2 flex size-28 -translate-1/2 items-center justify-center rounded-full shadow-2xl transition duration-500 group-hover:scale-105',
-                index === 1 ? 'bg-navy-900 text-gold-300' : 'bg-white text-navy-900',
-              ]}>
-                <Icon name={index === 0 ? 'star' : index === 1 ? 'book' : 'bag'} size={42} strokeWidth={1.4} />
-              </div>
-            </div>
-            <p class="mt-5 text-xs font-bold tracking-wider text-gold-500 uppercase">{product.category}</p>
-            <h3 class="mt-2 text-lg font-extrabold text-navy-900">{product.name}</h3>
-          </article>
-        ))}
+        <div class="grid border-t border-navy-900/15 sm:grid-cols-3">
+          {products.map((product) => (
+            <article class="group border-b border-navy-900/15 py-7 sm:border-l sm:px-7">
+              <span class="text-[0.62rem] font-bold tracking-widest text-gold-500 uppercase">{product.category}</span>
+              <VisualPlaceholder variant="cream" aspect="tall" class="my-5" />
+              <h3 class="font-serif text-xl font-normal text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">{product.name}</h3>
+            </article>
+          ))}
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="bg-slate-100 px-5 py-12 sm:px-7 sm:py-16">
-    <div class="mx-auto max-w-7xl overflow-hidden rounded-3xl bg-navy-900 px-6 py-14 text-center text-white shadow-2xl shadow-navy-900/15 sm:px-12 sm:py-20">
-      <p class="text-xs font-extrabold tracking-[0.18em] text-gold-300 uppercase">Bersama PESUMA</p>
-      <h2 class="mx-auto mt-5 max-w-3xl text-3xl leading-tight font-black tracking-tight sm:text-4xl lg:text-5xl">Bersama Memperkukuh Integriti Profesion</h2>
-      <p class="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-300">
-        Sertai komuniti PESUMA dan bersama membina jaringan Pesuruhjaya Sumpah yang profesional, berilmu dan berintegriti.
-      </p>
-      <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-        <a href="/keahlian/" class="btn-primary">Daftar Sebagai Ahli <Icon name="arrow" size={18} /></a>
+  <!-- ═══════════ CTA AKHIR ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-900 px-5 py-20 text-white sm:px-8 lg:py-28">
+    <!-- Subtle geometric pattern instead of logo watermark -->
+    <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] rounded-full border border-white/20"></div>
+      <div class="absolute top-[30%] right-[4rem] size-[10rem] rotate-45 border border-white/10"></div>
+      <div class="absolute bottom-[20%] right-[16rem] size-[4rem] rotate-45 border border-gold-400/20"></div>
+    </div>
+    <div class="relative mx-auto max-w-5xl text-center">
+      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Bersama PESUMA</p>
+      <h2 class="mt-7 font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem] lg:text-[2.75rem]">Bersama memperkukuh integriti profesion.</h2>
+      <p class="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-300">Sertai komuniti profesional yang berkembang melalui ilmu, kebajikan dan jaringan berintegriti.</p>
+      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="/keahlian/" class="btn-primary">Daftar Sebagai Ahli <Icon name="arrow" /></a>
         <a href="/hubungi/" class="btn-secondary-dark">Hubungi PESUMA</a>
       </div>
     </div>

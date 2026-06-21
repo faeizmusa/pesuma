@@ -45,6 +45,68 @@ export async function getLatestPosts(limit = 3): Promise<PostSummary[]> {
     }));
 }
 
+export type PostFull = {
+  slug: string;
+  title: string;
+  date: string | null;
+  category: string;
+  excerpt: string;
+  coverImage: string | null;
+  gallery: { image: string; caption?: string }[];
+};
+
+export async function getPost(slug: string): Promise<PostFull | null> {
+  const entry = await reader.collections.posts.read(slug);
+  if (!entry) return null;
+  return {
+    slug,
+    title: entry.title,
+    date: entry.date,
+    category: entry.category,
+    excerpt: entry.excerpt,
+    coverImage: entry.coverImage,
+    gallery: entry.gallery
+      ? entry.gallery.map((g) => ({ image: g.image || '', caption: g.caption || '' }))
+      : [],
+  };
+}
+
+export async function getAllPosts(): Promise<PostSummary[]> {
+  const slugs = await reader.collections.posts.list();
+  const entries = await Promise.all(
+    slugs.map(async (slug) => {
+      const entry = await reader.collections.posts.read(slug);
+      return entry ? { slug, ...entry } : null;
+    }),
+  );
+
+  return entries
+    .filter((entry): entry is NonNullable<typeof entry> & { date: string } => Boolean(entry?.date))
+    .sort((a, b) => b.date.localeCompare(a.date))
+    .map(({ slug, title, date, category, excerpt, coverImage }) => ({
+      slug,
+      title,
+      date,
+      category,
+      excerpt,
+      coverImage,
+    }));
+}
+
+export async function getAllEvents(): Promise<EventSummary[]> {
+  const slugs = await reader.collections.events.list();
+  const entries = await Promise.all(
+    slugs.map(async (slug) => {
+      const entry = await reader.collections.events.read(slug);
+      return entry ? { slug, ...entry } : null;
+    }),
+  );
+
+  return entries
+    .filter((entry): entry is NonNullable<typeof entry> & { date: string } => Boolean(entry?.date))
+    .sort((a, b) => b.date.localeCompare(a.date));
+}
+
 export async function getFeaturedEvent(): Promise<EventSummary | null> {
   const slugs = await reader.collections.events.list();
   const entries = await Promise.all(

@@ -1,0 +1,228 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import VisualPlaceholder from '../../components/VisualPlaceholder.astro';
+import { getCurrentMembers } from '../../lib/committee';
+
+const pillars = [
+  {
+    number: '01',
+    title: 'Menyatukan komuniti',
+    text: 'Memupuk hubungan muhibah, semangat kerjasama dan budaya saling membantu dalam kalangan ahli di seluruh Malaysia.',
+  },
+  {
+    number: '02',
+    title: 'Memelihara kebajikan',
+    text: 'Membina jaringan sokongan yang merangkumi ahli yang sedang berkhidmat serta mereka yang telah bersara.',
+  },
+  {
+    number: '03',
+    title: 'Memajukan profesionalisme',
+    text: 'Menyediakan ruang pembelajaran, bimbingan, kursus dan perkongsian ilmu yang relevan dengan keperluan amalan.',
+  },
+  {
+    number: '04',
+    title: 'Menghubungkan pihak berkepentingan',
+    text: 'Mewujudkan kerjasama yang konstruktif dengan pertubuhan, organisasi dan pihak berkaitan yang berkongsi matlamat seiring.',
+  },
+];
+
+const commitments = [
+  'Menggerakkan aktiviti amal, sosial, kebudayaan dan pendidikan untuk manfaat ahli serta komuniti.',
+  'Membantu ahli dalam perkara berkaitan perkhidmatan, termasuk saluran pandangan dan rujukan yang bersesuaian.',
+  'Menghasilkan serta menyebarkan penerbitan, bahan rujukan dan maklumat yang menyokong kemajuan profesion.',
+  'Meningkatkan kefahaman masyarakat terhadap fungsi dan perkhidmatan Pesuruhjaya Sumpah.',
+];
+
+const timeline = [
+  {
+    year: 'Pra-2020',
+    title: 'Asas sebuah gerakan bersama',
+    text: 'PPJSWPSB dibentuk di bawah pimpinan Puan Hazlin binti Mohamed dengan dorongan Tuan Akhiruddin, sebagai usaha awal menghimpunkan dan mewakili komuniti Pesuruhjaya Sumpah.',
+  },
+  {
+    year: '2020–2021',
+    title: 'Ketahanan ketika pandemik',
+    text: 'Pandemik COVID-19 dan tempoh kawalan pergerakan menjejaskan aktiviti serta perancangan, namun aspirasi untuk memperkukuh jaringan komuniti terus dipelihara.',
+  },
+  {
+    year: '2022',
+    title: 'Lahirnya identiti PESUMA',
+    text: 'Apabila negara memasuki fasa endemik, gerak kerja disusun semula dan PPJSWPSB dijenamakan sebagai Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia—membuka fasa baharu pertumbuhan dan perwakilan.',
+  },
+  {
+    year: '2023',
+    title: 'Komuniti kembali berhimpun',
+    text: 'Konvensyen PESUMA di Hotel Tenera, Bangi menjadi ruang pertemuan, perkongsian ilmu dan pengukuhan hubungan dalam kalangan komuniti.',
+  },
+  {
+    year: '2024',
+    title: 'Memperluas hubungan institusi',
+    text: 'PESUMA meneruskan usaha membina hubungan melalui kunjungan hormat dan pertemuan bersama Pejabat Ketua Pendaftar Mahkamah Persekutuan serta Unit Pesuruhjaya Sumpah.',
+  },
+];
+---
+
+<BaseLayout
+  title="Mengenai PESUMA | Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia"
+  description="Kenali PESUMA, wadah profesional yang menyatukan komuniti Pesuruhjaya Sumpah Malaysia melalui kebajikan, pembangunan ilmu, kerjasama dan khidmat berintegriti."
+>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-950 text-white">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-y-0 right-0 w-[42%] border-l border-white/6 bg-[linear-gradient(145deg,rgba(199,164,73,0.09),transparent_60%)]"></div>
+      <!-- Geometric pattern instead of logo watermark -->
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] -translate-y-1/2 rounded-full border border-white/8"></div>
+      <div class="absolute top-[20%] right-[8rem] size-[12rem] rotate-45 border border-white/6"></div>
+    </div>
+    <div class="container-site relative grid min-h-[590px] items-end gap-14 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
+      <div>
+        <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Mengenai PESUMA</p>
+        <h1 class="mt-8 max-w-4xl font-serif text-[2.25rem] leading-[1.08] font-normal tracking-[-0.025em] sm:text-[2.75rem] lg:text-[3.25rem]">
+          Dibina atas semangat <span class="text-gold-300">kebersamaan</span>, digerakkan dengan integriti.
+        </h1>
+      </div>
+      <div class="border-l border-gold-400/55 pl-7 lg:mb-2">
+        <p class="max-w-lg text-lg leading-9 text-slate-300">
+          Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia ialah wadah profesional yang menghimpunkan komuniti untuk berkembang melalui ilmu, kebajikan, kerjasama dan khidmat yang berintegriti.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ SIAPA KAMI ═══════════ -->
+  <section class="bg-cream-50 section-pad">
+    <div class="container-site grid gap-14 lg:grid-cols-[0.65fr_1.35fr] lg:gap-24">
+      <div>
+        <p class="eyebrow">Siapa kami</p>
+        <VisualPlaceholder variant="white" aspect="square" class="mt-7" />
+      </div>
+      <div class="lg:pt-12">
+        <h2 class="section-title">Persatuan profesional yang memahami suara dan keperluan komuniti.</h2>
+        <div class="mt-10 grid gap-8 border-t border-navy-900/15 pt-9 md:grid-cols-2">
+          <p class="text-lg leading-9 text-slate-700">
+            PESUMA diwujudkan untuk mempertemukan Pesuruhjaya Sumpah dalam sebuah jaringan yang tersusun—tempat pengalaman dikongsi, ilmu diperkaya dan kebajikan diberi perhatian.
+          </p>
+          <div class="space-y-5 text-sm leading-7 text-slate-600">
+            <p>Kami percaya profesion yang kukuh dibina melalui komuniti yang saling menyokong, terbuka kepada pembelajaran dan teguh memelihara amanah.</p>
+            <p>Atas prinsip itu, PESUMA menggerakkan program pembangunan, aktiviti persatuan, penerbitan, jaringan kerjasama dan inisiatif kebajikan untuk manfaat ahli.</p>
+          </div>
+        </div>
+        <blockquote class="mt-12 border-y border-navy-900/15 py-8">
+          <p class="font-serif text-3xl leading-tight text-navy-900 sm:text-4xl">"Berkhidmat Berintegriti" bukan sekadar motto—ia menjadi asas kepada cara komuniti ini belajar, berhubung dan memberi khidmat.</p>
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ ASPIRASI ═══════════ -->
+  <section class="bg-white section-pad">
+    <div class="container-site">
+      <div class="grid gap-12 lg:grid-cols-[0.65fr_1.35fr] lg:gap-24">
+        <div>
+          <p class="eyebrow">Aspirasi kami</p>
+          <h2 class="section-title">Profesion yang lebih tersusun, berilmu dan diyakini.</h2>
+          <p class="section-copy">PESUMA berusaha menjadi penghubung yang memperkukuh komuniti tanpa mengambil alih fungsi pihak berkuasa atau sumber rasmi kerajaan.</p>
+        </div>
+        <div class="grid border-t border-navy-900/15 sm:grid-cols-2">
+          {pillars.map((pillar, index) => (
+            <article class:list={['border-b border-navy-900/15 py-8 sm:px-8', index % 2 === 1 && 'sm:border-l']}>
+              <span class="text-[0.65rem] font-bold tracking-[0.18em] text-gold-500">{pillar.number}</span>
+              <h3 class="mt-6 font-serif text-2xl font-normal text-navy-900 sm:text-3xl">{pillar.title}</h3>
+              <p class="mt-4 text-sm leading-7 text-slate-600">{pillar.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ KOMITMEN ═══════════ -->
+  <section class="bg-navy-900 text-white section-pad">
+    <div class="container-site grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+      <div>
+        <p class="eyebrow">Komitmen pertubuhan</p>
+        <h2 class="max-w-xl font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem]">Daripada hubungan ahli kepada kefahaman masyarakat.</h2>
+        <p class="mt-7 max-w-lg text-sm leading-7 text-slate-300">Gerak kerja PESUMA merangkumi pembangunan dalaman komuniti serta usaha membantu orang ramai memahami perkhidmatan Pesuruhjaya Sumpah dengan lebih baik.</p>
+      </div>
+      <ol class="border-t border-white/15">
+        {commitments.map((commitment, index) => (
+          <li class="grid gap-4 border-b border-white/15 py-7 sm:grid-cols-[4rem_1fr]">
+            <span class="font-serif text-2xl text-gold-300">0{index + 5}</span>
+            <p class="text-base leading-8 text-slate-200">{commitment}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════ TIMELINE ═══════════ -->
+  <section class="bg-cream-50 section-pad">
+    <div class="container-site">
+      <div class="grid gap-12 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
+        <div>
+          <p class="eyebrow">Perjalanan PESUMA</p>
+          <h2 class="section-title">Sebuah perjalanan yang terus berkembang.</h2>
+          <p class="section-copy">Daripada usaha awal membina perwakilan sehingga hubungan institusi yang semakin luas, setiap fasa membentuk PESUMA hari ini.</p>
+        </div>
+        <div class="border-t border-navy-900/15">
+          {timeline.map((item) => (
+            <article class="grid gap-5 border-b border-navy-900/15 py-8 sm:grid-cols-[8rem_0.7fr_1fr]">
+              <span class="font-serif text-2xl text-gold-500">{item.year}</span>
+              <h3 class="font-serif text-2xl font-normal text-navy-900">{item.title}</h3>
+              <p class="text-sm leading-7 text-slate-600">{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ JAWATANKUASA CTA ═══════════ -->
+  <section class="border-y border-gold-400/35 bg-white">
+    <div class="container-site grid items-center gap-9 py-16 lg:grid-cols-[1fr_auto]">
+      <div>
+        <p class="text-[0.65rem] font-bold tracking-[0.2em] text-gold-500 uppercase">Kepimpinan PESUMA</p>
+        <h2 class="mt-4 max-w-3xl font-serif text-3xl leading-tight font-normal text-navy-900 sm:text-4xl">Kenali barisan yang menggerakkan amanah dan hala tuju pertubuhan.</h2>
+      </div>
+      <div class="flex flex-col items-center gap-5 sm:flex-row">
+        <!-- Avatar row -->
+        <div class="flex -space-x-2">
+          {(await getCurrentMembers()).filter((m) => m.positionGroup === 'Kepimpinan Utama').map((member) => (
+            <a href={`/jawatankuasa/${member.slug}/`} class="block size-12 overflow-hidden rounded-full border-2 border-white ring-1 ring-navy-900/10 transition-transform duration-[var(--transition-fast)] hover:scale-110 hover:ring-gold-400/50" title={member.fullName}>
+              {member.photo ? (
+                <img src={member.photo} alt={member.fullName} class="h-full w-full object-cover" loading="lazy" />
+              ) : (
+                <div class="flex h-full w-full items-center justify-center bg-navy-900 text-[0.55rem] font-bold text-gold-300 uppercase">
+                  {member.fullName.charAt(0)}
+                </div>
+              )}
+            </a>
+          ))}
+        </div>
+        <a href="/jawatankuasa/" class="btn-secondary shrink-0">Lihat Jawatankuasa <Icon name="arrow" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA AKHIR ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-950 px-5 py-20 text-white sm:px-8 lg:py-28">
+    <!-- Subtle geometric pattern instead of logo watermark -->
+    <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] rounded-full border border-white/20"></div>
+      <div class="absolute top-[30%] right-[4rem] size-[10rem] rotate-45 border border-white/10"></div>
+      <div class="absolute bottom-[20%] right-[16rem] size-[4rem] rotate-45 border border-gold-400/20"></div>
+    </div>
+    <div class="relative mx-auto max-w-5xl text-center">
+      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Sebahagian daripada komuniti</p>
+      <h2 class="mt-7 font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem]">Bersama membina profesion yang lebih kuat.</h2>
+      <p class="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-300">Sertai jaringan PESUMA untuk berkongsi ilmu, memperluas hubungan profesional dan menyumbang kepada komuniti yang berintegriti.</p>
+      <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
+        <a href="/keahlian/" class="btn-primary">Jadi Ahli PESUMA <Icon name="arrow" /></a>
+        <a href="/hubungi/" class="btn-secondary-dark">Hubungi Kami</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

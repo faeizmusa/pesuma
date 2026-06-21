@@ -1,0 +1,103 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import VisualPlaceholder from '../../components/VisualPlaceholder.astro';
+import { getCurrentMembers, getMemberBySlug } from '../../lib/committee';
+
+export async function getStaticPaths() {
+  const members = await getCurrentMembers();
+  return members.map((member) => ({
+    params: { slug: member.slug },
+    props: { slug: member.slug },
+  }));
+}
+
+const { slug } = Astro.props;
+const member = (await getMemberBySlug(slug))!;
+
+const variantMap: Record<string, 'navy' | 'gold' | 'cream'> = {
+  'Kepimpinan Utama': 'navy',
+  'Majlis Tertinggi': 'gold',
+  'Ketua Biro': 'cream',
+  'Ahli Jawatankuasa': 'cream',
+  'Pemeriksa Kira-kira': 'cream',
+  'Penasihat': 'cream',
+};
+---
+
+<BaseLayout
+  title={`${member.name} — Jawatankuasa PESUMA`}
+  description={member.bio ? `${member.name} — ${member.position}. ${member.bio.slice(0, 120)}` : `${member.name} — ${member.position}.`}
+>
+  <!-- ═══════════ BIODATA ═══════════ -->
+  <section class="bg-cream-50">
+    <div class="container-site py-14 sm:py-20 lg:py-24">
+      <a href="/jawatankuasa/" class="link-arrow mb-10 inline-flex">
+        <span class="rotate-180"><Icon name="arrow" /></span> Semua Jawatankuasa
+      </a>
+
+      <div class="grid gap-12 lg:grid-cols-[0.4fr_0.08fr_1fr] lg:items-start">
+        <!-- Photo -->
+        <div class="aspect-[4/5] overflow-hidden rounded-[6px] bg-navy-900 sm:max-w-sm shadow-soft">
+          {member.photo ? (
+            <img src={member.photo} alt={member.fullName} class="h-full w-full object-cover" loading="eager" />
+          ) : (
+            <VisualPlaceholder variant={variantMap[member.positionGroup] ?? 'cream'} aspect="tall" />
+          )}
+        </div>
+
+        <!-- Vertical divider (desktop) -->
+        <div class="hidden h-full w-px bg-navy-900/15 lg:block"></div>
+
+        <!-- Details -->
+        <div>
+          <span class="text-[0.6rem] font-bold tracking-[0.18em] text-gold-500 uppercase">{member.positionGroup}</span>
+          <h1 class="mt-4 font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.025em] text-navy-900 sm:text-[3rem]">
+            {member.fullName}
+          </h1>
+          <p class="mt-2 text-lg font-medium text-slate-600">{member.position}</p>
+
+          <!-- Term info -->
+          {member.termData && (
+            <div class="mt-8 border-t border-navy-900/15 pt-8">
+              <p class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">Penggal</p>
+              <p class="mt-1.5 font-serif text-lg text-navy-900">{member.termData.termName}</p>
+            </div>
+          )}
+
+          <!-- Bio -->
+          {member.bio && (
+            <div class="mt-8 border-t border-navy-900/15 pt-8">
+              <p class="text-base leading-8 text-slate-700">{member.bio}</p>
+            </div>
+          )}
+
+          <!-- Quote -->
+          {member.quote && (
+            <blockquote class="mt-8 border-l-2 border-gold-400 pl-6">
+              <p class="font-serif text-xl leading-relaxed text-navy-900 sm:text-2xl">"{member.quote}"</p>
+            </blockquote>
+          )}
+
+          <!-- Contact -->
+          {(member.email || member.linkedin) && (
+            <div class="mt-8 flex flex-wrap gap-4 border-t border-navy-900/15 pt-8">
+              {member.email && (
+                <a href={`mailto:${member.email}`} class="btn-secondary text-xs">
+                  <Icon name="mail" /> E-mel
+                </a>
+              )}
+              {member.linkedin && (
+                <a href={member.linkedin} target="_blank" rel="noopener noreferrer" class="btn-secondary text-xs">
+                  <Icon name="external" /> LinkedIn
+                </a>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

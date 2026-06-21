@@ -1,0 +1,148 @@
+---
+export const prerender = true;
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { site } from '../../data/site';
+
+const address = {
+  line1: 'No. 35B, Jalan Alpha F U6/F,',
+  line2: 'Pusat Perdagangan Subang Permai,',
+  line3: '40150 Shah Alam, Selangor.',
+};
+---
+
+<BaseLayout
+  title="Hubungi Kami | PESUMA"
+  description="Hubungi sekretariat PESUMA untuk sebarang pertanyaan mengenai keahlian, program dan perkhidmatan."
+>
+  <!-- ═══════════ HERO ═══════════ -->
+  <section class="relative overflow-hidden bg-navy-950 text-white">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-y-0 right-0 w-[42%] border-l border-white/6 bg-[linear-gradient(145deg,rgba(199,164,73,0.09),transparent_60%)]"></div>
+      <div class="absolute top-1/2 right-[-6rem] size-[30rem] -translate-y-1/2 rounded-full border border-white/8"></div>
+    </div>
+    <div class="container-site relative py-20 lg:py-24">
+      <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Hubungi PESUMA</p>
+      <h1 class="mt-8 max-w-4xl font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.03em] sm:text-[3.25rem] lg:text-[4rem]">
+        Kami sedia <span class="text-gold-300">mendengar</span>.
+      </h1>
+      <p class="mt-5 max-w-2xl border-l border-gold-400/60 pl-6 text-base leading-8 text-slate-300 sm:text-lg">
+        Ada pertanyaan tentang keahlian, program atau kerjasama? Hubungi kami melalui e-mel, atau gunakan borang di bawah.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════ FORM + INFO ═══════════ -->
+  <section class="bg-cream-50 section-pad">
+    <div class="container-site">
+      <div class="grid gap-14 lg:grid-cols-[0.6fr_0.05fr_1fr]">
+        <!-- Contact info -->
+        <div>
+          <p class="eyebrow">Maklumat</p>
+
+          <div class="mt-8 space-y-8">
+            <!-- Email -->
+            <div>
+              <p class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">E-mel</p>
+              <a href={`mailto:${site.email}`} class="mt-2 inline-flex items-center gap-2 font-serif text-xl text-navy-900 transition-colors duration-[var(--transition-fast)] hover:text-gold-500">
+                {site.email}
+              </a>
+            </div>
+
+            <!-- Address -->
+            <div>
+              <p class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">Alamat</p>
+              <address class="mt-2 not-italic">
+                <p class="font-serif text-lg leading-relaxed text-navy-900">
+                  {address.line1}<br />
+                  {address.line2}<br />
+                  {address.line3}
+                </p>
+              </address>
+            </div>
+
+            <!-- Website -->
+            <div>
+              <p class="text-[0.55rem] font-bold tracking-[0.16em] text-gold-500 uppercase">Laman web</p>
+              <a href={site.url} target="_blank" rel="noopener noreferrer" class="mt-2 inline-flex items-center gap-2 font-serif text-xl text-navy-900 transition-colors duration-[var(--transition-fast)] hover:text-gold-500">
+                {site.url.replace('https://', '')} <Icon name="external" size={14} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vertical divider -->
+        <div class="hidden h-full w-px bg-navy-900/15 lg:block"></div>
+
+        <!-- Form -->
+        <div>
+          <p class="eyebrow">Hantar Mesej</p>
+          <form
+            action={`mailto:${site.email}`}
+            method="get"
+            enctype="text/plain"
+            class="mt-8 space-y-6"
+          >
+            <div class="grid gap-5 sm:grid-cols-2">
+              <div>
+                <label for="name" class="text-[0.6rem] font-bold tracking-[0.12em] text-navy-900 uppercase">Nama</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Nama penuh"
+                  class="mt-2 block w-full rounded-sm border border-navy-900/20 bg-white px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30"
+                />
+              </div>
+              <div>
+                <label for="email" class="text-[0.6rem] font-bold tracking-[0.12em] text-navy-900 uppercase">E-mel</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="alamat@e-mel.com"
+                  class="mt-2 block w-full rounded-sm border border-navy-900/20 bg-white px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label for="subject" class="text-[0.6rem] font-bold tracking-[0.12em] text-navy-900 uppercase">Subjek</label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                required
+                placeholder="Ringkasan mesej"
+                class="mt-2 block w-full rounded-sm border border-navy-900/20 bg-white px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30"
+              />
+            </div>
+
+            <div>
+              <label for="body" class="text-[0.6rem] font-bold tracking-[0.12em] text-navy-900 uppercase">Mesej</label>
+              <textarea
+                id="body"
+                name="body"
+                required
+                rows="5"
+                placeholder="Tulis mesej anda di sini..."
+                class="mt-2 block w-full rounded-sm border border-navy-900/20 bg-white px-4 py-3 text-sm text-navy-900 placeholder:text-slate-400 focus:border-gold-400 focus:outline-none focus:ring-2 focus:ring-gold-400/30 resize-y"
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary w-full sm:w-auto">
+              Hantar Mesej <Icon name="arrow" />
+            </button>
+
+            <p class="text-xs leading-5 text-slate-500">
+              Mesej akan dihantar melalui aplikasi e-mel anda. Atau, e-mel terus ke <a href={`mailto:${site.email}`} class="underline hover:text-gold-500">{site.email}</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

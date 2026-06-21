@@ -3,15 +3,26 @@ export const site = {
   fullName: 'Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia',
   description:
     'Platform profesional yang menyatukan komuniti Pesuruhjaya Sumpah Malaysia melalui kebajikan ahli, pembangunan ilmu, program latihan, sumber rujukan dan jaringan berintegriti.',
-  url: 'https://pesuma.org.my',
+  url: 'https://pesuma.com.my',
   epjsUrl: 'https://epjs.kehakiman.gov.my/',
-  email: 'sekretariat@pesuma.org.my',
+  email: 'office@pesuma.com.my',
 };
 
-export const navigation = [
-  { label: 'Mengenai Kami', href: '/mengenai/' },
+export type NavItem = {
+  label: string;
+  href?: string;
+  children?: { label: string; href: string }[];
+};
+
+export const navigation: NavItem[] = [
+  {
+    label: 'Mengenai Kami',
+    children: [
+      { label: 'Tentang PESUMA', href: '/mengenai/' },
+      { label: 'Jawatankuasa', href: '/jawatankuasa/' },
+    ],
+  },
   { label: 'Keahlian', href: '/keahlian/' },
-  { label: 'Sumber', href: '/sumber/' },
   { label: 'Berita & Acara', href: '/berita/' },
   { label: 'Kedai', href: '/kedai/' },
   { label: 'Hubungi Kami', href: '/hubungi/' },
