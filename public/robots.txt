@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pesuma.com.my/sitemap-index.xml
