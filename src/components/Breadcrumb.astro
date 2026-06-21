@@ -1,0 +1,28 @@
+---
+export type Crumb = {
+  label: string;
+  href: string;
+};
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="mb-6 flex items-center gap-2 text-[0.6rem] font-bold tracking-[0.08em] text-slate-400 uppercase">
+  <a href="/" class="transition hover:text-gold-300">Utama</a>
+  {items.map((item, i) => (
+    <>
+      <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="shrink-0 opacity-40" aria-hidden="true">
+        <path d="M3.5 2l3 3-3 3" />
+      </svg>
+      {i === items.length - 1 ? (
+        <span class="text-gold-300" aria-current="page">{item.label}</span>
+      ) : (
+        <a href={item.href} class="transition hover:text-gold-300">{item.label}</a>
+      )}
+    </>
+  ))}
+</nav>

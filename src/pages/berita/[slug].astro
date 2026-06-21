@@ -4,6 +4,7 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import GalleryGrid from '../../components/GalleryGrid.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getAllPosts, getPost } from '../../lib/content';
 
 export async function getStaticPaths() {
@@ -36,6 +37,8 @@ const formatDate = (date: string | null) => date ? dateFormat.format(new Date(`$
         <a href="/berita/" class="link-arrow mb-8 inline-flex">
           <span class="rotate-180"><Icon name="arrow" /></span> Semua Berita
         </a>
+
+        <Breadcrumb items={[{ label: 'Berita', href: '/berita/' }, { label: post.title, href: '#' }]} />
 
         <div class="flex flex-wrap items-center gap-3">
           <span class="text-[0.6rem] font-bold tracking-[0.16em] text-gold-500 uppercase">{post.category}</span>

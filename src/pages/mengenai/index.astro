@@ -4,6 +4,7 @@ export const prerender = true;
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Icon from '../../components/Icon.astro';
 import VisualPlaceholder from '../../components/VisualPlaceholder.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import { getCurrentMembers } from '../../lib/committee';
 
 const pillars = [
@@ -72,22 +73,25 @@ const timeline = [
   <!-- ═══════════ HERO ═══════════ -->
   <section class="relative overflow-hidden bg-navy-950 text-white">
     <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute inset-y-0 right-0 w-[42%] border-l border-white/6 bg-[linear-gradient(145deg,rgba(199,164,73,0.09),transparent_60%)]"></div>
-      <!-- Geometric pattern instead of logo watermark -->
-      <div class="absolute top-1/2 right-[-6rem] size-[30rem] -translate-y-1/2 rounded-full border border-white/8"></div>
-      <div class="absolute top-[20%] right-[8rem] size-[12rem] rotate-45 border border-white/6"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(145deg,#050d1c_0%,#0a1a35_40%,#0e2240_65%,#050d1c_100%)]"></div>
+      <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse 70% 50% at 25% 25%, rgba(199,164,73,0.10) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 75% 70%, rgba(199,164,73,0.06) 0%, transparent 50%)"></div>
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: repeating-linear-gradient(65deg, transparent, transparent 120px, rgba(199,164,73,0.06) 120px, rgba(199,164,73,0.06) 121px)"></div>
+      <div class="absolute -top-1/4 -right-1/4 h-[150%] w-[28%] rotate-[20deg] opacity-[0.03] bg-gold-400"></div>
+      <div class="absolute -top-1/4 -right-1/4 h-[150%] w-px rotate-[20deg] opacity-[0.07] bg-gold-400"></div>
+      <div class="absolute top-[15%] left-[6%] size-2 rounded-full bg-gold-400/20 blur-[3px]"></div>
+      <div class="absolute top-[55%] right-[10%] size-2.5 rounded-full bg-gold-400/12 blur-[4px]"></div>
+      <div class="absolute bottom-[20%] left-[18%] size-1.5 rounded-full bg-gold-400/15 blur-[2px]"></div>
+      <div class="absolute top-[75%] right-[25%] size-1 rounded-full bg-gold-400/20 blur-sm"></div>
+      <div class="absolute top-[35%] left-[45%] size-1 rounded-full bg-gold-400/10 blur-sm"></div>
     </div>
-    <div class="container-site relative grid min-h-[590px] items-end gap-14 py-20 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-      <div>
-        <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Mengenai PESUMA</p>
-        <h1 class="mt-8 max-w-4xl font-serif text-[2.25rem] leading-[1.08] font-normal tracking-[-0.025em] sm:text-[2.75rem] lg:text-[3.25rem]">
-          Dibina atas semangat <span class="text-gold-300">kebersamaan</span>, digerakkan dengan integriti.
-        </h1>
-      </div>
-      <div class="border-l border-gold-400/55 pl-7 lg:mb-2">
-        <p class="max-w-lg text-lg leading-9 text-slate-300">
-          Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia ialah wadah profesional yang menghimpunkan komuniti untuk berkembang melalui ilmu, kebajikan, kerjasama dan khidmat yang berintegriti.
-        </p>
+    <div class="container-site relative py-16 sm:py-20 lg:py-28">
+      <Breadcrumb items={[{ label: 'Mengenai PESUMA', href: '/mengenai/' }]} />
+      <p class="text-[0.68rem] font-bold tracking-[0.26em] text-gold-300 uppercase">Mengenai PESUMA</p>
+      <h1 class="mt-8 max-w-4xl font-serif text-[2.5rem] leading-[1.05] font-normal tracking-[-0.03em] sm:text-[3.25rem] lg:text-[4rem]">
+        Dibina atas semangat <span class="text-gold-300">kebersamaan</span>, digerakkan dengan integriti.
+      </h1>
+      <div class="mt-5 max-w-2xl border-l border-gold-400/60 pl-6 text-base leading-8 text-slate-300 sm:text-lg">
+        <p>Pertubuhan Gabungan Pesuruhjaya Sumpah Malaysia ialah wadah profesional yang menghimpunkan komuniti untuk berkembang melalui ilmu, kebajikan, kerjasama dan khidmat yang berintegriti.</p>
       </div>
     </div>
   </section>
@@ -209,11 +213,11 @@ const timeline = [
 
   <!-- ═══════════ CTA AKHIR ═══════════ -->
   <section class="relative overflow-hidden bg-navy-950 px-5 py-20 text-white sm:px-8 lg:py-28">
-    <!-- Subtle geometric pattern instead of logo watermark -->
-    <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
-      <div class="absolute top-1/2 right-[-6rem] size-[30rem] rounded-full border border-white/20"></div>
-      <div class="absolute top-[30%] right-[4rem] size-[10rem] rotate-45 border border-white/10"></div>
-      <div class="absolute bottom-[20%] right-[16rem] size-[4rem] rotate-45 border border-gold-400/20"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 bg-[linear-gradient(160deg,#0e2240_0%,#050d1c_100%)]"></div>
+      <div class="absolute -bottom-40 -left-40 size-[50rem] opacity-30" style="background: radial-gradient(circle, rgba(199,164,73,0.10) 0%, transparent 60%)"></div>
+      <div class="absolute top-[20%] right-[8%] size-1.5 rounded-full bg-gold-400/20 blur-sm"></div>
+      <div class="absolute bottom-[30%] right-[20%] size-2 rounded-full bg-gold-400/15 blur-[2px]"></div>
     </div>
     <div class="relative mx-auto max-w-5xl text-center">
       <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Sebahagian daripada komuniti</p>

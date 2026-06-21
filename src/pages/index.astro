@@ -23,10 +23,25 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   <!-- ═══════════ HERO ═══════════ -->
   <section class="relative overflow-hidden bg-navy-950 text-white">
     <div class="absolute inset-0" aria-hidden="true">
-      <div class="absolute inset-y-0 right-0 w-1/2 border-l border-white/6 bg-[linear-gradient(135deg,rgba(199,164,73,0.08),transparent_55%)]"></div>
-      <!-- Subtle geometric circles -->
-      <div class="absolute top-0 right-0 size-[44rem] translate-x-1/3 -translate-y-1/3 rounded-full border border-gold-400/10"></div>
-      <div class="absolute top-0 right-0 size-[34rem] translate-x-1/3 -translate-y-1/3 rounded-full border border-gold-400/10"></div>
+      <!-- Deep gradient base with smooth stops -->
+      <div class="absolute inset-0 bg-[linear-gradient(145deg,#050d1c_0%,#0a1a35_40%,#0e2240_65%,#050d1c_100%)]"></div>
+
+      <!-- Mesh gradient: dual radial glows for depth -->
+      <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse 70% 50% at 25% 25%, rgba(199,164,73,0.10) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 75% 70%, rgba(199,164,73,0.06) 0%, transparent 50%)"></div>
+
+      <!-- Diagonal tech lines -->
+      <div class="absolute inset-0 opacity-[0.04]" style="background-image: repeating-linear-gradient(65deg, transparent, transparent 120px, rgba(199,164,73,0.06) 120px, rgba(199,164,73,0.06) 121px)"></div>
+
+      <!-- Diagonal gold accent sweep -->
+      <div class="absolute -top-1/4 -right-1/4 h-[150%] w-[28%] rotate-[20deg] opacity-[0.03] bg-gold-400"></div>
+      <div class="absolute -top-1/4 -right-1/4 h-[150%] w-px rotate-[20deg] opacity-[0.07] bg-gold-400"></div>
+
+      <!-- Floating glow orbs -->
+      <div class="absolute top-[15%] left-[6%] size-2 rounded-full bg-gold-400/20 blur-[3px]"></div>
+      <div class="absolute top-[55%] right-[10%] size-2.5 rounded-full bg-gold-400/12 blur-[4px]"></div>
+      <div class="absolute bottom-[20%] left-[18%] size-1.5 rounded-full bg-gold-400/15 blur-[2px]"></div>
+      <div class="absolute top-[75%] right-[25%] size-1 rounded-full bg-gold-400/20 blur-sm"></div>
+      <div class="absolute top-[35%] left-[45%] size-1 rounded-full bg-gold-400/10 blur-sm"></div>
     </div>
 
     <div class="container-site relative grid min-h-[720px] items-center gap-14 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
@@ -45,17 +60,27 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
       </div>
 
       <div class="relative hidden min-h-[480px] lg:block">
-        <div class="absolute top-0 right-0 h-full w-[82%] border border-white/10 bg-white/[0.025]"></div>
-        <div class="absolute top-10 right-10 flex h-[calc(100%-5rem)] w-[82%] flex-col justify-between border border-gold-400/25 p-10">
-          <div class="flex items-start justify-between">
-            <span class="text-[0.62rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Ditubuhkan untuk komuniti</span>
-            <span class="font-serif text-5xl text-white/10">P</span>
+        <div class="absolute inset-0 border border-white/10 bg-white/[0.025] rounded-sm"></div>
+        <div class="relative flex h-full flex-col items-center justify-center p-12 text-center">
+          <img src="/logo-pesuma.png" width="546" height="546" alt="Logo rasmi PESUMA" class="w-44 opacity-90" loading="eager" />
+
+          <div class="mt-8 grid grid-cols-3 gap-x-6 gap-y-3">
+            <div>
+              <strong class="block font-serif text-3xl font-normal text-gold-300">18</strong>
+              <span class="text-[0.55rem] tracking-[0.18em] text-slate-400 uppercase">Ahli Jawatankuasa</span>
+            </div>
+            <div>
+              <strong class="block font-serif text-3xl font-normal text-gold-300">10</strong>
+              <span class="text-[0.55rem] tracking-[0.18em] text-slate-400 uppercase">Biro &amp; AJK</span>
+            </div>
+            <div>
+              <strong class="block font-serif text-3xl font-normal text-gold-300">6</strong>
+              <span class="text-[0.55rem] tracking-[0.18em] text-slate-400 uppercase">Negeri Diliputi</span>
+            </div>
           </div>
-          <img src="/logo-pesuma.png" width="546" height="546" alt="Logo rasmi PESUMA" class="mx-auto w-52 drop-shadow-2xl" loading="eager" />
-          <div class="grid grid-cols-3 border-t border-white/10 pt-6 text-center">
-            <div><strong class="block font-serif text-2xl font-normal text-gold-300">Ilmu</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Pembangunan</span></div>
-            <div class="border-x border-white/10"><strong class="block font-serif text-2xl font-normal text-gold-300">Bakti</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Kebajikan</span></div>
-            <div><strong class="block font-serif text-2xl font-normal text-gold-300">Jaringan</strong><span class="text-[0.6rem] tracking-wider text-slate-400 uppercase">Komuniti</span></div>
+
+          <div class="mt-8 border-t border-white/10 pt-6">
+            <p class="font-serif text-lg text-slate-300">Berkhidmat Berintegriti</p>
           </div>
         </div>
       </div>
@@ -302,11 +327,11 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
 
   <!-- ═══════════ CTA AKHIR ═══════════ -->
   <section class="relative overflow-hidden bg-navy-900 px-5 py-20 text-white sm:px-8 lg:py-28">
-    <!-- Subtle geometric pattern instead of logo watermark -->
-    <div class="absolute inset-0 opacity-[0.04]" aria-hidden="true">
-      <div class="absolute top-1/2 right-[-6rem] size-[30rem] rounded-full border border-white/20"></div>
-      <div class="absolute top-[30%] right-[4rem] size-[10rem] rotate-45 border border-white/10"></div>
-      <div class="absolute bottom-[20%] right-[16rem] size-[4rem] rotate-45 border border-gold-400/20"></div>
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 bg-[linear-gradient(160deg,#0e2240_0%,#050d1c_100%)]"></div>
+      <div class="absolute -bottom-40 -left-40 size-[50rem] opacity-30" style="background: radial-gradient(circle, rgba(199,164,73,0.10) 0%, transparent 60%)"></div>
+      <div class="absolute top-[20%] right-[8%] size-1.5 rounded-full bg-gold-400/20 blur-sm"></div>
+      <div class="absolute bottom-[30%] right-[20%] size-2 rounded-full bg-gold-400/15 blur-[2px]"></div>
     </div>
     <div class="relative mx-auto max-w-5xl text-center">
       <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Bersama PESUMA</p>
