@@ -67,18 +67,14 @@ const requirements = [
   description="Sertai PESUMA dan nikmati pelbagai manfaat keahlian — pembangunan profesional, kebajikan, jaringan komuniti dan banyak lagi."
 >
   <!-- ═══════════ HERO ═══════════ -->
-  <section class="relative overflow-hidden bg-navy-950 text-white">
+  <section class="relative overflow-hidden bg-navy-950 text-white grain">
     <div class="absolute inset-0" aria-hidden="true">
       <div class="absolute inset-0 bg-[linear-gradient(145deg,#050d1c_0%,#0a1a35_40%,#0e2240_65%,#050d1c_100%)]"></div>
       <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse 70% 50% at 25% 25%, rgba(199,164,73,0.10) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 75% 70%, rgba(199,164,73,0.06) 0%, transparent 50%)"></div>
       <div class="absolute inset-0 opacity-[0.04]" style="background-image: repeating-linear-gradient(65deg, transparent, transparent 120px, rgba(199,164,73,0.06) 120px, rgba(199,164,73,0.06) 121px)"></div>
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-[28%] rotate-[20deg] opacity-[0.03] bg-gold-400"></div>
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-px rotate-[20deg] opacity-[0.07] bg-gold-400"></div>
-      <div class="absolute top-[15%] left-[6%] size-2 rounded-full bg-gold-400/20 blur-[3px]"></div>
-      <div class="absolute top-[55%] right-[10%] size-2.5 rounded-full bg-gold-400/12 blur-[4px]"></div>
-      <div class="absolute bottom-[20%] left-[18%] size-1.5 rounded-full bg-gold-400/15 blur-[2px]"></div>
-      <div class="absolute top-[75%] right-[25%] size-1 rounded-full bg-gold-400/20 blur-sm"></div>
-      <div class="absolute top-[35%] left-[45%] size-1 rounded-full bg-gold-400/10 blur-sm"></div>
+      <div class="absolute top-[20%] right-[12%] size-2 rounded-full bg-gold-400/15 blur-[3px]"></div>
     </div>
     <div class="container-site relative py-16 sm:py-20 lg:py-28">
       <Breadcrumb items={[{ label: 'Keahlian', href: '/keahlian/' }]} />
@@ -93,7 +89,7 @@ const requirements = [
   </section>
 
   <!-- ═══════════ KENAPA MENJADI AHLI ═══════════ -->
-  <section class="bg-white section-pad">
+  <section class="bg-white section-pad fade-in">
     <div class="container-site text-center">
       <p class="eyebrow justify-center">Manfaat Keahlian</p>
       <h2 class="section-title mx-auto">Lebih daripada sekadar penyertaan.</h2>
@@ -103,7 +99,7 @@ const requirements = [
 
   <!-- ═══════════ BENEFIT CATEGORIES ═══════════ -->
   {benefitCategories.map((cat, index) => (
-    <section class:list={['section-pad', index % 2 === 0 ? 'bg-cream-50' : 'bg-white']}>
+    <section class:list={['section-pad fade-in', index % 2 === 0 ? 'bg-cream-50' : 'bg-white']}>
       <div class="container-site">
         <div class="grid gap-10 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
           <div>
@@ -124,7 +120,7 @@ const requirements = [
   ))}
 
   <!-- ═══════════ SYARAT ═══════════ -->
-  <section class="bg-white section-pad border-t border-navy-900/10">
+  <section class="bg-white section-pad border-t border-navy-900/10 fade-in">
     <div class="container-site grid gap-12 lg:grid-cols-[0.55fr_1.45fr] lg:gap-24">
       <div>
         <p class="eyebrow">Kelayakan</p>
@@ -146,15 +142,18 @@ const requirements = [
   </section>
 
   <!-- ═══════════ CARA DAFTAR ═══════════ -->
-  <section class="bg-navy-900 text-white section-pad">
-    <div class="container-site text-center">
-      <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Sertai Kami</p>
+  <section class="relative overflow-hidden bg-navy-900 text-white section-pad grain fade-in">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(ellipse 50% 50% at 50% 20%, rgba(199,164,73,0.08) 0%, transparent 55%)"></div>
+    </div>
+    <div class="container-site relative text-center">
+      <p class="relative text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Sertai Kami</p>
       <h2 class="mx-auto mt-6 max-w-3xl font-serif text-[1.875rem] leading-[1.12] font-normal text-white sm:text-[2.25rem] lg:text-[2.75rem]">
         Jadilah sebahagian daripada komuniti Pesuruhjaya Sumpah yang berkembang melalui ilmu, kebajikan dan jaringan berintegriti.
       </h2>
       <div class="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
         <a href="mailto:office@pesuma.com.my" class="btn-primary">Daftar Sekarang <Icon name="arrow" /></a>
-        <a href="/hubungi/" class="btn-secondary-dark">Hubungi Kami</a>
+        <a href="/hubungi/" class="btn-secondary-dark">Hubungi Kami <Icon name="mail" /></a>
       </div>
       <p class="mt-6 text-xs leading-6 text-slate-400">Ada pertanyaan? E-melkan ke <a href="mailto:office@pesuma.com.my" class="underline hover:text-gold-300">office@pesuma.com.my</a></p>
     </div>

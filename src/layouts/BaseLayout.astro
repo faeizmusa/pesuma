@@ -65,6 +65,24 @@ const organizationSchema = {
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', () => {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -60px 0px', threshold: 0.1 }
+        );
+        document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+      });
+    </script>
   </head>
   <body>
     <a href="#kandungan-utama" class="fixed top-3 left-3 z-[100] -translate-y-20 rounded-lg bg-gold-400 px-4 py-3 text-sm font-extrabold text-navy-950 transition focus:translate-y-0">

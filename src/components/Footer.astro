@@ -4,10 +4,22 @@ import Icon from './Icon.astro';
 import { site } from '../data/site';
 
 const year = new Date().getFullYear();
+
+const address = {
+  line1: 'No. 35B, Jalan Alpha F U6/F,',
+  line2: 'Pusat Perdagangan Subang Permai,',
+  line3: '40150 Shah Alam, Selangor.',
+};
 ---
 
-<footer class="border-t-4 border-gold-400 bg-navy-950 text-white">
-  <div class="container-site grid gap-14 py-20 md:grid-cols-2 lg:grid-cols-[1.45fr_0.75fr_0.75fr_1fr]">
+<footer class="relative overflow-hidden border-t-4 border-gold-400 bg-navy-950 text-white grain">
+  <!-- Subtle overlay -->
+  <div class="absolute inset-0" aria-hidden="true">
+    <div class="absolute inset-0 bg-[linear-gradient(180deg,#050d1c_0%,#0a1a35_50%,#050d1c_100%)]"></div>
+    <div class="absolute -bottom-20 left-1/4 size-[40rem] opacity-[0.04]" style="background: radial-gradient(circle, rgba(199,164,73,0.12) 0%, transparent 60%)"></div>
+  </div>
+
+  <div class="container-site relative grid gap-14 py-20 md:grid-cols-2 lg:grid-cols-[1.45fr_0.75fr_0.75fr_1fr]">
     <div>
       <Logo light />
       <p class="mt-7 max-w-md font-serif text-xl leading-8 text-slate-300">
@@ -45,14 +57,19 @@ const year = new Date().getFullYear();
 
     <div>
       <h2 class="text-[0.65rem] font-extrabold tracking-[0.2em] text-gold-300 uppercase">Hubungi Kami</h2>
-      <p class="mt-5 text-sm leading-6 text-slate-300">Sekretariat PESUMA<br />Malaysia</p>
+      <address class="mt-5 not-italic text-sm leading-6 text-slate-300">
+        Sekretariat PESUMA<br />
+        {address.line1}<br />
+        {address.line2}<br />
+        {address.line3}
+      </address>
       <a href={`mailto:${site.email}`} class="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-gold-300">
         <Icon name="mail" size={18} /> {site.email}
       </a>
     </div>
   </div>
 
-  <div class="border-t border-white/10">
+  <div class="relative border-t border-white/10">
     <div class="container-site flex flex-col gap-4 py-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
       <p>© {year} PESUMA. Hak cipta terpelihara.</p>
       <div class="flex flex-wrap gap-x-5 gap-y-2">

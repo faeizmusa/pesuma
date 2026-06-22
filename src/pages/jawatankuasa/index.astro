@@ -25,18 +25,14 @@ const groupLabels: Record<string, string> = {
   description={term ? `Kenali barisan Jawatankuasa ${term.termName} yang menggerakkan hala tuju dan program PESUMA.` : 'Kenali barisan kepimpinan PESUMA.'}
 >
   <!-- ═══════════ HERO ═══════════ -->
-  <section class="relative overflow-hidden bg-navy-950 text-white">
+  <section class="relative overflow-hidden bg-navy-950 text-white grain">
     <div class="absolute inset-0" aria-hidden="true">
       <div class="absolute inset-0 bg-[linear-gradient(145deg,#050d1c_0%,#0a1a35_40%,#0e2240_65%,#050d1c_100%)]"></div>
       <div class="absolute inset-0 opacity-30" style="background: radial-gradient(ellipse 70% 50% at 25% 25%, rgba(199,164,73,0.10) 0%, transparent 55%), radial-gradient(ellipse 50% 40% at 75% 70%, rgba(199,164,73,0.06) 0%, transparent 50%)"></div>
       <div class="absolute inset-0 opacity-[0.04]" style="background-image: repeating-linear-gradient(65deg, transparent, transparent 120px, rgba(199,164,73,0.06) 120px, rgba(199,164,73,0.06) 121px)"></div>
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-[28%] rotate-[20deg] opacity-[0.03] bg-gold-400"></div>
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-px rotate-[20deg] opacity-[0.07] bg-gold-400"></div>
-      <div class="absolute top-[15%] left-[6%] size-2 rounded-full bg-gold-400/20 blur-[3px]"></div>
-      <div class="absolute top-[55%] right-[10%] size-2.5 rounded-full bg-gold-400/12 blur-[4px]"></div>
-      <div class="absolute bottom-[20%] left-[18%] size-1.5 rounded-full bg-gold-400/15 blur-[2px]"></div>
-      <div class="absolute top-[75%] right-[25%] size-1 rounded-full bg-gold-400/20 blur-sm"></div>
-      <div class="absolute top-[35%] left-[45%] size-1 rounded-full bg-gold-400/10 blur-sm"></div>
+      <div class="absolute top-[20%] right-[12%] size-2 rounded-full bg-gold-400/15 blur-[3px]"></div>
     </div>
     <div class="container-site relative py-16 sm:py-20 lg:py-28">
       <Breadcrumb items={[{ label: 'Jawatankuasa', href: '/jawatankuasa/' }]} />
@@ -54,7 +50,7 @@ const groupLabels: Record<string, string> = {
 
   <!-- ═══════════ AMANAT PRESIDEN ═══════════ -->
   {term?.presidentMessage && (
-    <section class="border-y border-navy-900/10 bg-white">
+    <section class="border-y border-navy-900/10 bg-white fade-in">
       <div class="container-site flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
         <div class="flex items-center gap-4">
           <span class="text-[0.65rem] font-bold tracking-[0.22em] text-gold-500 uppercase">Amanat Presiden</span>
@@ -72,12 +68,9 @@ const groupLabels: Record<string, string> = {
     if (!groupMembers || groupMembers.length === 0) return null;
 
     return (
-      <section class:list={['section-pad', groupName === 'Kepimpinan Utama' ? 'bg-white' : 'bg-cream-50 border-t border-navy-900/8']}>
+      <section class:list={['section-pad fade-in', groupName === 'Kepimpinan Utama' ? 'bg-white' : 'bg-cream-50 border-t border-navy-900/8']}>
         <div class="container-site">
-          <div class="flex items-center gap-4 border-b border-navy-900/15 pb-5">
-            <span class="font-serif text-2xl text-gold-500">
-              {String(displayGroups.indexOf(groupName) + 1).padStart(2, '0')}
-            </span>
+          <div class="border-b border-navy-900/15 pb-5">
             <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal tracking-[-0.02em] text-navy-900 sm:text-[2.25rem]">
               {groupLabels[groupName]}
             </h2>
@@ -115,8 +108,11 @@ const groupLabels: Record<string, string> = {
   )}
 
   <!-- ═══════════ CTA KE AHLIAN ═══════════ -->
-  <section class="bg-navy-900 section-pad">
-    <div class="container-site text-center">
+  <section class="relative overflow-hidden bg-navy-900 section-pad grain fade-in">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(ellipse 50% 40% at 20% 80%, rgba(199,164,73,0.08) 0%, transparent 55%)"></div>
+    </div>
+    <div class="container-site relative text-center">
       <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Bersama PESUMA</p>
       <h2 class="mx-auto mt-7 max-w-3xl font-serif text-[1.875rem] leading-[1.12] font-normal text-white sm:text-[2.25rem] lg:text-[2.75rem]">
         Sertai komuniti yang diterajui barisan profesional ini.

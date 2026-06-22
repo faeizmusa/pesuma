@@ -21,7 +21,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
 
 <BaseLayout>
   <!-- ═══════════ HERO ═══════════ -->
-  <section class="relative overflow-hidden bg-navy-950 text-white">
+  <section class="relative overflow-hidden bg-navy-950 text-white grain">
     <div class="absolute inset-0" aria-hidden="true">
       <!-- Deep gradient base with smooth stops -->
       <div class="absolute inset-0 bg-[linear-gradient(145deg,#050d1c_0%,#0a1a35_40%,#0e2240_65%,#050d1c_100%)]"></div>
@@ -36,12 +36,8 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-[28%] rotate-[20deg] opacity-[0.03] bg-gold-400"></div>
       <div class="absolute -top-1/4 -right-1/4 h-[150%] w-px rotate-[20deg] opacity-[0.07] bg-gold-400"></div>
 
-      <!-- Floating glow orbs -->
-      <div class="absolute top-[15%] left-[6%] size-2 rounded-full bg-gold-400/20 blur-[3px]"></div>
-      <div class="absolute top-[55%] right-[10%] size-2.5 rounded-full bg-gold-400/12 blur-[4px]"></div>
-      <div class="absolute bottom-[20%] left-[18%] size-1.5 rounded-full bg-gold-400/15 blur-[2px]"></div>
-      <div class="absolute top-[75%] right-[25%] size-1 rounded-full bg-gold-400/20 blur-sm"></div>
-      <div class="absolute top-[35%] left-[45%] size-1 rounded-full bg-gold-400/10 blur-sm"></div>
+      <!-- Single subtle accent -->
+      <div class="absolute top-[20%] right-[12%] size-2 rounded-full bg-gold-400/15 blur-[3px]"></div>
     </div>
 
     <div class="container-site relative grid min-h-[720px] items-center gap-14 py-20 lg:grid-cols-[1.15fr_0.85fr] lg:py-28">
@@ -55,7 +51,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
         </p>
         <div class="mt-10 flex flex-col gap-3 sm:flex-row">
           <a href="/keahlian/" class="btn-primary">Jadi Ahli PESUMA <Icon name="arrow" /></a>
-          <a href="#program" class="btn-secondary-dark">Program Terkini</a>
+          <a href="#program" class="btn-secondary-dark">Program Terkini <Icon name="calendar" /></a>
         </div>
       </div>
 
@@ -100,7 +96,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ QUICK LINKS ═══════════ -->
-  <section class="bg-cream-50 py-10 sm:py-14">
+  <section class="bg-cream-50 py-10 sm:py-14 fade-in">
     <div class="container-site">
       <div class="grid border-y border-navy-900/15 sm:grid-cols-2 lg:grid-cols-3">
         {quickActions.map((item, index) => (
@@ -125,7 +121,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ TENTANG PESUMA ═══════════ -->
-  <section class="bg-white section-pad">
+  <section class="bg-white section-pad fade-in">
     <div class="container-site grid gap-14 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
       <div>
         <p class="eyebrow">Mengenai PESUMA</p>
@@ -139,16 +135,37 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
           </p>
           <div>
             <p class="text-sm leading-7 text-slate-600">Melalui program ilmu, aktiviti kebajikan, jaringan ahli dan sumber rujukan, komuniti dapat berkembang bersama keperluan semasa.</p>
-            <a href="/mengenai/" class="link-arrow mt-7">Kenali PESUMA <Icon name="arrow" /></a>
+            <a href="/mengenai/" class="link-plain mt-7 inline-block">Kenali PESUMA —</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- ═══════════ PULL QUOTE ═══════════ -->
+  <section class="overflow-hidden bg-white py-24 sm:py-28 lg:py-32">
+    <div class="container-site max-w-4xl text-center">
+      <span class="block font-serif text-[5rem] leading-none text-gold-300/20 select-none" aria-hidden="true">"</span>
+      <blockquote class="-mt-10">
+        <p class="font-serif text-[1.75rem] leading-[1.25] font-normal text-navy-900 sm:text-[2.25rem] lg:text-[2.75rem]">
+          Bukan sekadar profesion.
+          <br />Tapi amanah yang kita jaga bersama.
+        </p>
+      </blockquote>
+      <div class="mt-10 flex items-center justify-center gap-4">
+        <span class="h-px w-8 bg-navy-900/15"></span>
+        <span class="text-[0.55rem] font-bold tracking-[0.2em] text-slate-400 uppercase">Berkhidmat Berintegriti</span>
+        <span class="h-px w-8 bg-navy-900/15"></span>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══════════ AUDIENS ═══════════ -->
-  <section class="bg-navy-900 text-white section-pad">
-    <div class="container-site">
+  <section class="relative overflow-hidden bg-navy-900 text-white section-pad grain fade-in">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(ellipse 55% 45% at 75% 80%, rgba(199,164,73,0.08) 0%, transparent 55%)"></div>
+    </div>
+    <div class="container-site relative">
       <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div>
           <p class="eyebrow">Untuk komuniti</p>
@@ -172,7 +189,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ KEABILAN ═══════════ -->
-  <section class="bg-cream-50 section-pad">
+  <section class="bg-cream-50 section-pad fade-in">
     <div class="container-site">
       <div class="grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
         <div>
@@ -184,10 +201,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
         <div class="grid border-t border-navy-900/15 sm:grid-cols-2">
           {benefits.map((item, index) => (
             <article class:list={['border-b border-navy-900/15 py-8 sm:px-8', index % 2 === 1 && 'sm:border-l', index === benefits.length - 1 && 'sm:col-span-2']}>
-              <div class="flex items-baseline justify-between gap-4">
-                <h3 class="font-serif text-2xl font-normal text-navy-900">{item.title}</h3>
-                <span class="text-[0.65rem] font-bold tracking-widest text-gold-500">0{index + 1}</span>
-              </div>
+              <h3 class="font-serif text-2xl font-normal text-navy-900">{item.title}</h3>
               <p class="mt-4 max-w-xl text-sm leading-7 text-slate-600">{item.text}</p>
             </article>
           ))}
@@ -197,7 +211,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ BERITA & AKTIVITI ═══════════ -->
-  <section class="bg-white section-pad">
+  <section class="bg-white section-pad fade-in">
     <div class="container-site">
       <div class="flex flex-col gap-8 border-b border-navy-900/15 pb-9 sm:flex-row sm:items-end sm:justify-between">
         <div>
@@ -229,7 +243,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
                 <a href={`/berita/${post.slug}/`} class="transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500">{post.title}</a>
               </h3>
               <p class="mt-4 text-sm leading-7 text-slate-600">{post.excerpt}</p>
-              <a href={`/berita/${post.slug}/`} class="link-arrow mt-5">Baca Lanjut <Icon name="arrow" /></a>
+              <a href={`/berita/${post.slug}/`} class="link-plain mt-5 inline-block">Baca Lanjut —</a>
             </article>
           ))}
         </div>
@@ -238,8 +252,11 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ PROGRAM PILIHAN ═══════════ -->
-  <section id="program" class="bg-navy-950 text-white section-pad">
-    <div class="container-site grid gap-14 lg:grid-cols-[0.76fr_1.24fr] lg:gap-24">
+  <section id="program" class="relative overflow-hidden bg-navy-950 text-white section-pad grain fade-in">
+    <div class="absolute inset-0" aria-hidden="true">
+      <div class="absolute inset-0 opacity-[0.03]" style="background: radial-gradient(ellipse 40% 50% at 25% 65%, rgba(199,164,73,0.06) 0%, transparent 55%)"></div>
+    </div>
+    <div class="container-site relative grid gap-14 lg:grid-cols-[0.76fr_1.24fr] lg:gap-24">
       <div>
         <p class="eyebrow">Program pilihan</p>
         <h2 class="font-serif text-[1.875rem] leading-[1.12] font-normal sm:text-[2.25rem]">Pembangunan profesional yang relevan.</h2>
@@ -264,7 +281,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ SUMBER ═══════════ -->
-  <section class="bg-cream-50 section-pad">
+  <section class="bg-cream-50 section-pad fade-in">
     <div class="container-site grid gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
       <div>
         <p class="eyebrow">Pusat rujukan</p>
@@ -272,25 +289,24 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
         <p class="section-copy">Pautan pantas kepada panduan, borang dan sumber rasmi berkaitan amalan.</p>
       </div>
       <div class="border-t border-navy-900/15">
-        {resources.map((item, index) => (
-          <a
-            href={item.href}
-            target={item.external ? '_blank' : undefined}
-            rel={item.external ? 'noopener noreferrer' : undefined}
-            class="group grid grid-cols-[2.5rem_1fr_auto] items-center gap-4 border-b border-navy-900/15 py-6"
-          >
-            <span class="font-serif text-lg text-gold-500">0{index + 1}</span>
-            <span class="font-serif text-xl text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500 sm:text-2xl">{item.title}</span>
-            <span class="transition-transform duration-[var(--transition-fast)] group-hover:translate-x-1"><Icon name={item.external ? 'external' : 'arrow'} /></span>
-          </a>
-        ))}
+          {resources.map((item) => (
+            <a
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              class="group grid grid-cols-[1fr_auto] items-center gap-4 border-b border-navy-900/15 py-6"
+            >
+              <span class="font-serif text-xl text-navy-900 transition-colors duration-[var(--transition-fast)] group-hover:text-gold-500 sm:text-2xl">{item.title}</span>
+              <span class="transition-transform duration-[var(--transition-fast)] group-hover:translate-x-1"><Icon name={item.external ? 'external' : 'arrow'} /></span>
+            </a>
+          ))}
         <p class="mt-7 text-xs leading-6 text-slate-500">PESUMA menyediakan pautan dan ringkasan rujukan untuk kemudahan pengguna. Untuk maklumat rasmi dan terkini, sila rujuk portal rasmi pihak berkuasa berkaitan.</p>
       </div>
     </div>
   </section>
 
   <!-- ═══════════ EPJS CTA ═══════════ -->
-  <section class="border-y border-gold-400/35 bg-white">
+  <section class="border-y border-gold-400/35 bg-white fade-in">
     <div class="container-site grid items-center gap-8 py-14 lg:grid-cols-[1fr_auto]">
       <div>
         <p class="text-[0.65rem] font-bold tracking-[0.2em] text-gold-500 uppercase">Direktori rasmi</p>
@@ -304,13 +320,13 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ KEDAI ═══════════ -->
-  <section class="bg-white section-pad">
+  <section class="bg-white section-pad fade-in">
     <div class="container-site">
       <div class="grid gap-10 lg:grid-cols-[0.55fr_1.45fr]">
         <div>
           <p class="eyebrow">Kedai PESUMA</p>
           <h2 class="section-title">Identiti komuniti.</h2>
-          <a href="/kedai/" class="link-arrow mt-8">Lihat Kedai <Icon name="arrow" /></a>
+          <a href="/kedai/" class="link-arrow mt-8">Lihat Kedai <Icon name="bag" /></a>
         </div>
         <div class="grid border-t border-navy-900/15 sm:grid-cols-3">
           {products.map((product) => (
@@ -326,12 +342,10 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
   </section>
 
   <!-- ═══════════ CTA AKHIR ═══════════ -->
-  <section class="relative overflow-hidden bg-navy-900 px-5 py-20 text-white sm:px-8 lg:py-28">
+  <section class="relative overflow-hidden bg-navy-900 px-5 py-20 text-white sm:px-8 lg:py-28 grain fade-in">
     <div class="absolute inset-0" aria-hidden="true">
       <div class="absolute inset-0 bg-[linear-gradient(160deg,#0e2240_0%,#050d1c_100%)]"></div>
       <div class="absolute -bottom-40 -left-40 size-[50rem] opacity-30" style="background: radial-gradient(circle, rgba(199,164,73,0.10) 0%, transparent 60%)"></div>
-      <div class="absolute top-[20%] right-[8%] size-1.5 rounded-full bg-gold-400/20 blur-sm"></div>
-      <div class="absolute bottom-[30%] right-[20%] size-2 rounded-full bg-gold-400/15 blur-[2px]"></div>
     </div>
     <div class="relative mx-auto max-w-5xl text-center">
       <p class="text-[0.65rem] font-bold tracking-[0.24em] text-gold-300 uppercase">Bersama PESUMA</p>
@@ -339,7 +353,7 @@ const formatDate = (date: string) => dateFormat.format(new Date(`${date}T00:00:0
       <p class="mx-auto mt-7 max-w-2xl text-base leading-8 text-slate-300">Sertai komuniti profesional yang berkembang melalui ilmu, kebajikan dan jaringan berintegriti.</p>
       <div class="mt-10 flex flex-col justify-center gap-3 sm:flex-row">
         <a href="/keahlian/" class="btn-primary">Daftar Sebagai Ahli <Icon name="arrow" /></a>
-        <a href="/hubungi/" class="btn-secondary-dark">Hubungi PESUMA</a>
+        <a href="/hubungi/" class="btn-secondary-dark">Hubungi PESUMA <Icon name="mail" /></a>
       </div>
     </div>
   </section>
